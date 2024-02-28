@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://cesium.com/downloads/cesiumjs/releases/1.114/Build/Cesium/Cesium.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/i18next/23.9.0/i18next.min.js"
+      integrity="sha512-2KRrfza4PJZX3WAcWBaOo6S3u7uOrnESelNwYwkYUgeLskpL1EYZvpo9uTfLphaUScNXrWasCK0J8gcYrVwGXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-xhr-backend/3.2.2/i18nextXHRBackend.min.js" integrity="sha512-MUYO1+VEcFMYb/UEtAGdOArYvDh/yth3ZQwfmdttD9CURHAMzkfCZPRYIbXNCbOQWSjOXjjj5xwjEk/gEMXCdg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="module" src="./components/Translate/translate.js"></script>
+    <link
+      href="https://cesium.com/downloads/cesiumjs/releases/1.114/Build/Cesium/Widgets/widgets.css"
+      rel="stylesheet"
+    />
+    <link href="./index.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="country-flags">
+      <div
+        id="sv-flag"
+        class="emojione--flag-for-sweden"
+        onclick="changeLanguage('sv')"
+      ></div>
+      <div
+        id="en-flag"
+        class="emojione--flag-for-united-kingdom"
+        onclick="changeLanguage('en')"
+      >
+      </div>
+    </div>
+    <div id="cesiumContainer">
+      <img src="./assets/Logo.png" class="kbaLogo" />
+    </div>
+    <div class="layer-switcher-card" id="draggableCard">
+      <div class="layer-switcher-header">
+        <h3 id="layer-switcher-title"></h3>
+        <hr />
+      </div>
+        <div class="layer-switcher">
+           <label>
+            <input type="checkbox" id="toggleDefaultTileset" class="check">
+            <span id="default-content"></span>
+          </input>
+          </label>
+          <label>
+            <input type="checkbox" id="toggleKBATileset" class="check" checked>
+            <span id="layer-switcher-content"></span>
+          </input>
+          </label>
+        </div>
+      <script type="module" src="index.js"></script>
+        <script type="module" src="./components/defaultTileMouseEvent.js"></script>
+        <script type="module" src="./components/newMouseEvent.js"></script>
+        <script type="module" src="./components/navStyle.js"></script>
+    </div>
+  </body>
+</html>

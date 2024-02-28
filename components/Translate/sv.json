@@ -1,0 +1,14 @@
+{
+  "lsTitle": "Lagerhanteraren",
+  "lsDefaultContent": "OpenStreetMap 3D-byggnader och terräng",
+  "lsKbaContent": "Kungsbacka 3D-byggnader och terräng",
+  "propertyName.name": "Namn",
+  "propertyName.operator": "Operatör",
+  "propertyName.building": "Byggnad",
+  "propertyName.shop": "Butik",
+  "propertyName.opening_hours": "Öppettider",
+  "propertyName.cesium_longitude": "Longitud",
+  "propertyName.cesium_latitude": "Latitud",
+  "propertyName.addr_city": "Stad",
+  "propertyName.addr_street": "Gata"
+}
