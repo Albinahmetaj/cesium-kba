@@ -2,7 +2,11 @@
   "lsTitle": "Layerswitcher",
   "lsDefaultContent": "OpenStreetMap 3D buildings & terrain",
   "lsKbaContent": "Kungsbacka 3D buildings & terrain",
+  "timeChangerTitle": "Toggle winter- and summer time",
+  "timeChangerMonth": "Month",
   "propertyName.name": "Name",
+  "timeChangerDay": "Day",
+  "timeChangerHour": "Time",
   "propertyName.operator": "Operator",
   "propertyName.building": "Building",
   "propertyName.shop": "Shop",
@@ -10,5 +14,21 @@
   "propertyName.cesium_longitude": "Longitude",
   "propertyName.cesium_latitude": "Latitude",
   "propertyName.addr_city": "City",
-  "propertyName.addr_street": "Street"
+  "propertyName.addr_street": "Street",
+  "infoTableHeader": "Buildingtype",
+  "infoTableHeaderColor": "Colour",
+  "months": {
+    "January": "January",
+    "February": "February",
+    "March": "March",
+    "April": "April",
+    "May": "May",
+    "June": "June",
+    "July": "July",
+    "August": "August",
+    "September": "September",
+    "October": "October",
+    "November": "November",
+    "December": "December"
+  }
 }

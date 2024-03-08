@@ -37,12 +37,12 @@
     <div id="cesiumContainer">
       <img src="./assets/Logo.png" class="kbaLogo" />
     </div>
-    <div class="layer-switcher-card" id="draggableCard">
+  <div id="draggableLayerSwitcherCard">
       <div class="layer-switcher-header">
         <h3 id="layer-switcher-title"></h3>
         <hr />
       </div>
-        <div class="layer-switcher">
+      <div class="layer-switcher">
            <label>
             <input type="checkbox" id="toggleDefaultTileset" class="check">
             <span id="default-content"></span>
@@ -54,10 +54,32 @@
           </input>
           </label>
         </div>
+    </div>
+      
+    <div id="timeChangerCard">
+        <div id="timeDateTogglev"></div>
+        <button id="summerButton"></button>
+        <button id="winterButton"></button>
+        
+        <div id="monthContainer">
+          <label id="monthLabel" for="monthSlider"></label>
+          <input type="range" id="monthSlider" min="1" max="12" step="1" value="0">
+          <span id="monthOutput"></span>
+      </div>
+      <div id="dayContainer">
+          <label id="dayLabel" for="daySlider"></label>
+          <input type="range" id="daySlider" min="1" max="31" step="1" value="1">
+          <span id="dayOutput"></span>
+      </div>
+      <div id="hourContainer">
+          <label id="hourLabel" for="hourSlider"></label>
+          <input type="range" id="hourSlider" min="0" max="23" step="1" value="0">
+          <span id="hourOutput"></span>
+      </div>
+    </div>
       <script type="module" src="index.js"></script>
-        <script type="module" src="./components/defaultTileMouseEvent.js"></script>
         <script type="module" src="./components/newMouseEvent.js"></script>
         <script type="module" src="./components/navStyle.js"></script>
-    </div>
+        <script type="module" src="./components/Timechanger/timeChanger.js"></script>
   </body>
 </html>

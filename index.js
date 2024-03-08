@@ -1,9 +1,21 @@
-import { applyBasicStyle } from "./components/style.js";
+import { applyBasicStyle } from "./components/buildingStyle.js";
 Cesium.Ion.defaultAccessToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJkNDQ3MDgxZC02OWU2LTRiNTMtYjUyNS1hYmRiMGRjMGE2N2EiLCJpZCI6MTkxOTM0LCJpYXQiOjE3MDc5MTU1NzF9.wwiBhBlO6d9r53a5uOWZkATR5tZGFzUpbt-I1ewTP1w";
 
-export const viewer = new Cesium.Viewer("cesiumContainer");
+export const viewer = new Cesium.Viewer("cesiumContainer", {
+  infoBox: true,
+  selectionIndicator: true,
+  shadows: true,
+  terrainShadows: Cesium.ShadowMode.ENABLED,
+  timeline: false,
+  animation: false,
+});
 let defaultTileset, kbaTileset;
+
+const shadowMap = viewer.shadowMap;
+shadowMap.maximumDistance = 5000.0;
+shadowMap.size = 4096;
+shadowMap.darkness = 0.6;
 
 const toggleCheck = {
   defaultTileset: false,
@@ -78,6 +90,7 @@ async function updateTilesetVisibility() {
     // Update default tileset visibility
     if (defaultTileset) {
       defaultTileset.show = state.defaultTileset;
+
       // close the infobox when the tileset is hidden
       if (!state.defaultTileset) {
         viewer.selectedEntity = undefined;
@@ -87,6 +100,7 @@ async function updateTilesetVisibility() {
     // Update KBA tileset visibility
     if (kbaTileset) {
       kbaTileset.show = state.kbaTileset;
+
       // close the infobox when the tileset is hidden
       if (!state.kbaTileset) {
         viewer.selectedEntity = undefined;
@@ -96,6 +110,7 @@ async function updateTilesetVisibility() {
     // Update terrain provider based on which tileset is shown
     if (state.defaultTileset) {
       // Set terrainProvider for default tileset
+
       viewer.terrainProvider =
         await Cesium.CesiumTerrainProvider.fromIonAssetId(1);
     } else {
@@ -152,6 +167,39 @@ kbaCheckbox.addEventListener("change", function (event) {
   }
   updateTilesetVisibility();
   updateCheckboxState();
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const toolbar = document.querySelector("div.cesium-viewer-toolbar");
+  const modeButton = document.querySelector(
+    "span.cesium-sceneModePicker-wrapper"
+  );
+  const myButton = document.createElement("button");
+  myButton.classList.add("cesium-button", "cesium-toolbar-button");
+  myButton.setAttribute("title", "Lagerhanteraren");
+
+  // Create a <span> element for the Iconify icon
+  const iconSpan = document.createElement("span");
+  iconSpan.classList.add("lsNavBtn");
+  iconSpan.setAttribute("data-icon", "mdi:camera");
+
+  // Append the icon to the button
+  myButton.appendChild(iconSpan);
+  toolbar.insertBefore(myButton, modeButton);
+
+  let tableShown = false;
+  const layerSwitcherCard = document.getElementById(
+    "draggableLayerSwitcherCard"
+  );
+
+  myButton.addEventListener("click", function () {
+    if (tableShown) {
+      layerSwitcherCard.style.display = "none"; // Hide the time changer
+    } else {
+      layerSwitcherCard.style.display = "block"; // Show the time changer
+    }
+    tableShown = !tableShown; // Toggle the visibility flag
+  });
 });
 
 // Initially set checkbox state

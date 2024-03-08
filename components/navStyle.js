@@ -1,10 +1,14 @@
+import { getBuildingColors } from "./buildingStyle.js";
+
 document.addEventListener("DOMContentLoaded", function () {
+  const colors = getBuildingColors();
   const toolbar = document.querySelector("div.cesium-viewer-toolbar");
   const modeButton = document.querySelector(
     "span.cesium-sceneModePicker-wrapper"
   );
   const myButton = document.createElement("button");
   myButton.classList.add("cesium-button", "cesium-toolbar-button");
+  myButton.setAttribute("title", "Information om byggnadstyper");
 
   // Create a <span> element for the Iconify icon
   const iconSpan = document.createElement("span");
@@ -13,14 +17,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Append the icon to the button
   myButton.appendChild(iconSpan);
-  const draggableCard = document.getElementById("draggableCard");
+  const draggableLsCard = document.getElementById("draggableLayerSwitcherCard");
 
   // Insert the button into the toolbar
   toolbar.insertBefore(myButton, modeButton);
 
   let tableShown = false;
   let table = null;
-  makeDraggable(draggableCard);
+  makeDraggable(draggableLsCard);
 
   // Function to create and toggle the table
   function toggleTable() {
@@ -29,24 +33,30 @@ document.addEventListener("DOMContentLoaded", function () {
       table = document.createElement("table");
       table.classList.add("infoTable");
       // Add your table content here
-      table.innerHTML = `
-            <thead>
-                <tr>
-                    <th>Column 1</th>
-                    <th>Column 2</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Data 1</td>
-                    <td>Data 2</td>
-                </tr>
-                <tr>
-                    <td>Data 3</td>
-                    <td>Data 4</td>
-                </tr>
-            </tbody>
-        `;
+      table.innerHTML += `
+  <thead > 
+    <tr>
+      <th id="tableHeader">Byggnadstyp</th>
+      <th id="tableHeaderColor">Färg</th>
+    </tr>
+  </thead>
+`;
+
+      const tbody = document.createElement("tbody");
+      for (const key in colors) {
+        const tr = document.createElement("tr");
+        const tdKey = document.createElement("td");
+        tdKey.textContent = key;
+        const tdColor = document.createElement("td");
+        const colorCircle = document.createElement("span");
+        colorCircle.classList.add("color-circle");
+        colorCircle.style.backgroundColor = colors[key];
+        tdColor.appendChild(colorCircle);
+        tr.appendChild(tdKey);
+        tr.appendChild(tdColor);
+        tbody.appendChild(tr);
+      }
+      table.appendChild(tbody);
 
       // Append the table to the document body or any other desired location
       document.body.appendChild(table);

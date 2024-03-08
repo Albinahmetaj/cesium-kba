@@ -2,6 +2,10 @@
   "lsTitle": "Lagerhanteraren",
   "lsDefaultContent": "OpenStreetMap 3D-byggnader och terräng",
   "lsKbaContent": "Kungsbacka 3D-byggnader och terräng",
+  "timeChangerTitle": "Växla vinter- och sommartid",
+  "timeChangerMonth": "Månad",
+  "timeChangerDay": "Dag",
+  "timeChangerHour": "Tid",
   "propertyName.name": "Namn",
   "propertyName.operator": "Operatör",
   "propertyName.building": "Byggnad",
@@ -10,5 +14,21 @@
   "propertyName.cesium_longitude": "Longitud",
   "propertyName.cesium_latitude": "Latitud",
   "propertyName.addr_city": "Stad",
-  "propertyName.addr_street": "Gata"
+  "propertyName.addr_street": "Gata",
+  "infoTableHeader": "Byggnadstyp",
+  "infoTableHeaderColor": "Färg",
+  "months": {
+    "January": "Januari",
+    "February": "Februari",
+    "March": "Mars",
+    "April": "April",
+    "May": "Maj",
+    "June": "Juni",
+    "July": "Juli",
+    "August": "Augusti",
+    "September": "September",
+    "October": "Oktober",
+    "November": "November",
+    "December": "December"
+  }
 }
