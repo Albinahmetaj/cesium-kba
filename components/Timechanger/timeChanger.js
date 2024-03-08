@@ -30,6 +30,8 @@ document.addEventListener("DOMContentLoaded", function () {
     tableShown = !tableShown; // Toggle the visibility flag
   });
 });
+const winterSolstice = new Date(2023, 12, 21); // December 21st, 2023
+const summerSolstice = new Date(2024, 6, 21); // June 21st, 2024
 // let timeDateToggle = document.getElementById("timeDateTogglev");
 let summerButton = document.getElementById("summerButton");
 let winterButton = document.getElementById("winterButton");
@@ -46,7 +48,7 @@ summerButton.addEventListener("click", function () {
   summerButton.classList.add("active");
   winterButton.classList.remove("active");
   // Set specific date for summer
-  setDate(3, 31); // June 21st
+  setDate(6, 21); // June 21st
 });
 
 winterButton.addEventListener("click", function () {
@@ -54,7 +56,7 @@ winterButton.addEventListener("click", function () {
   winterButton.classList.add("active");
   summerButton.classList.remove("active");
   // Set specific date for winter
-  setDate(10, 29); // December 21st
+  setDate(12, 21); // December 21st
 });
 
 const monthNames = [
@@ -80,7 +82,6 @@ hourSlider.addEventListener("input", updateDate);
 function pad(num) {
   return num < 10 ? "0" + num : num;
 }
-
 export function updateDate() {
   let monthIndex = monthSlider.value - 1; // Adjusting month index to start from 0
 
@@ -91,7 +92,8 @@ export function updateDate() {
   let hour = pad(hourSlider.value);
 
   let currentTimeString;
-  if (isSummer) {
+  // Check if the current date is after the winter solstice and before the summer solstice
+  if (new Date() > winterSolstice && new Date() < summerSolstice) {
     // Set time for summer
     currentTimeString =
       "2024-" + pad(monthSlider.value) + "-" + day + "T" + hour + ":00:00Z";
