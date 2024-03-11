@@ -117,15 +117,10 @@ async function updateTilesetVisibility() {
       // Set terrainProvider for KBA tileset
       viewer.terrainProvider = new Cesium.EllipsoidTerrainProvider();
     }
+    document.dispatchEvent(new CustomEvent("stateChanged", { detail: state }));
   } catch (error) {
     console.log(error);
   }
-  render();
-}
-
-function render() {
-  // test render console state
-  // console.log("State:", state);
 }
 
 function updateCheckboxState() {

@@ -1,4 +1,7 @@
 import { updateDate } from "../Timechanger/timeChanger.js";
+import { updateTableContent } from "../navStyle.js";
+import { handleLanguageChange } from "../newMouseEvent.js";
+
 function initializeApp() {
   i18next.use(i18nextXHRBackend).init(
     {
@@ -29,18 +32,6 @@ function updateContent() {
     document.getElementById("dayLabel").innerText = i18next.t("timeChangerDay");
     document.getElementById("hourLabel").innerText =
       i18next.t("timeChangerHour");
-    const tableHeader = document.getElementById("tableHeader");
-    if (tableHeader) {
-      tableHeader.innerText = i18next.t("infoTableHeader");
-    } else {
-      console.log("Element with id 'tableHeader' not found.");
-    }
-    const tableHeaderColor = document.getElementById("tableHeaderColor");
-    if (tableHeaderColor) {
-      tableHeaderColor.innerText = i18next.t("infoTableHeaderColor");
-    } else {
-      console.log("Element with id 'tableHeaderColor' not found.");
-    }
   } catch (error) {
     console.log(error);
   }
@@ -67,6 +58,7 @@ window.changeLanguage = function (lang) {
       if (err) return console.log("something went wrong loading", err);
       updateContent();
       updateDate();
+      updateTableContent();
 
       // Trigger updateDate function to update the displayed month name
     });

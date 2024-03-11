@@ -244,7 +244,7 @@ function updateInfoBoxContent(pickedFeature) {
 }
 
 // Function to handle language change and update info box content
-function handleLanguageChange() {
+export function handleLanguageChange() {
   if (lastPickedFeature) {
     updateInfoBoxContent(lastPickedFeature);
   }

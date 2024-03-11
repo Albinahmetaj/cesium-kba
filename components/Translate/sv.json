@@ -15,8 +15,6 @@
   "propertyName.cesium_latitude": "Latitud",
   "propertyName.addr_city": "Stad",
   "propertyName.addr_street": "Gata",
-  "infoTableHeader": "Byggnadstyp",
-  "infoTableHeaderColor": "Färg",
   "months": {
     "January": "Januari",
     "February": "Februari",
@@ -30,5 +28,14 @@
     "October": "Oktober",
     "November": "November",
     "December": "December"
-  }
+  },
+  "buildingColors": {
+    "Kungsbacka Kommun": "Kungsbacka Kommun",
+    "Parkering": "Parkering",
+    "Hus": "Hus",
+    "Lägenheter": "Lägenheter",
+    "Skola": "Skola",
+    "Affärer": "Affärer"
+  },
+  "tableTitleKey": "Byggnadstyper"
 }

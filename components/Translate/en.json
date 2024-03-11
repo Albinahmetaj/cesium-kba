@@ -15,8 +15,6 @@
   "propertyName.cesium_latitude": "Latitude",
   "propertyName.addr_city": "City",
   "propertyName.addr_street": "Street",
-  "infoTableHeader": "Buildingtype",
-  "infoTableHeaderColor": "Colour",
   "months": {
     "January": "January",
     "February": "February",
@@ -30,5 +28,14 @@
     "October": "October",
     "November": "November",
     "December": "December"
-  }
+  },
+  "buildingColors": {
+    "Kungsbacka Kommun": "Kungsbacka Municipality",
+    "Parkering": "Parking",
+    "Hus": "House",
+    "Lägenheter": "Apartments",
+    "Skola": "School",
+    "Affärer": "Shops"
+  },
+  "tableTitleKey": "Buildingtypes"
 }

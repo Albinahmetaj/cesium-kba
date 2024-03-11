@@ -1,144 +1,187 @@
-import { getBuildingColors } from "./buildingStyle.js";
+import { getBuildingColors, getBuildingColorNames } from "./buildingStyle.js";
+let buttonAdded = false; // Flag to track whether the button has been added
+let myButton = null; // Reference to the button element
+let tableShown = false;
+let table = null;
 
+const colors = getBuildingColors();
+export function updateTableContent() {
+  // create table title called byggnadstyper
+  const tableTitle = document.createElement("h4");
+  tableTitle.id = "infoTableTitle";
+
+  const translatedTitle = i18next.t("tableTitleKey");
+  tableTitle.textContent = translatedTitle;
+  const tbody = document.createElement("tbody");
+  tbody.appendChild(tableTitle);
+  const buildingColorNamesWithTranslations = getBuildingColorNames();
+  for (const key in buildingColorNamesWithTranslations) {
+    const tr = document.createElement("tr");
+    const tdValue = document.createElement("td");
+    tdValue.textContent = buildingColorNamesWithTranslations[key];
+    const tdColor = document.createElement("td");
+    const colorCircle = document.createElement("span");
+    colorCircle.classList.add("color-circle");
+    colorCircle.style.backgroundColor = colors[key]; // Assuming buildingColors contains the color values
+
+    tdColor.appendChild(colorCircle);
+    tr.appendChild(tdValue);
+    tr.appendChild(tdColor);
+    tbody.appendChild(tr);
+  }
+
+  // Clear existing table content before adding new rows
+  while (table?.firstChild) {
+    table?.removeChild(table?.firstChild);
+  }
+
+  table?.appendChild(tbody);
+}
 document.addEventListener("DOMContentLoaded", function () {
-  const colors = getBuildingColors();
-  const toolbar = document.querySelector("div.cesium-viewer-toolbar");
-  const modeButton = document.querySelector(
-    "span.cesium-sceneModePicker-wrapper"
-  );
-  const myButton = document.createElement("button");
-  myButton.classList.add("cesium-button", "cesium-toolbar-button");
-  myButton.setAttribute("title", "Information om byggnadstyper");
+  document.addEventListener("stateChanged", function (event) {
+    const newState = event.detail;
 
-  // Create a <span> element for the Iconify icon
-  const iconSpan = document.createElement("span");
-  iconSpan.classList.add("infoNavBtn");
-  iconSpan.setAttribute("data-icon", "mdi:camera");
-
-  // Append the icon to the button
-  myButton.appendChild(iconSpan);
-  const draggableLsCard = document.getElementById("draggableLayerSwitcherCard");
-
-  // Insert the button into the toolbar
-  toolbar.insertBefore(myButton, modeButton);
-
-  let tableShown = false;
-  let table = null;
-  makeDraggable(draggableLsCard);
-
-  // Function to create and toggle the table
-  function toggleTable() {
-    if (!tableShown) {
-      // Create the table element
-      table = document.createElement("table");
-      table.classList.add("infoTable");
-      // Add your table content here
-      table.innerHTML += `
-  <thead > 
-    <tr>
-      <th id="tableHeader">Byggnadstyp</th>
-      <th id="tableHeaderColor">Färg</th>
-    </tr>
-  </thead>
-`;
-
-      const tbody = document.createElement("tbody");
-      for (const key in colors) {
-        const tr = document.createElement("tr");
-        const tdKey = document.createElement("td");
-        tdKey.textContent = key;
-        const tdColor = document.createElement("td");
-        const colorCircle = document.createElement("span");
-        colorCircle.classList.add("color-circle");
-        colorCircle.style.backgroundColor = colors[key];
-        tdColor.appendChild(colorCircle);
-        tr.appendChild(tdKey);
-        tr.appendChild(tdColor);
-        tbody.appendChild(tr);
+    if (buttonAdded && newState.kbaTileset) {
+      if (myButton && myButton.parentNode) {
+        myButton.parentNode.removeChild(myButton);
+        myButton = null; // Clear the reference
+        buttonAdded = false; // Reset the flag
       }
-      table.appendChild(tbody);
+      return;
+    }
 
-      // Append the table to the document body or any other desired location
-      document.body.appendChild(table);
-      tableShown = true;
+    // If the button has already been added, do nothing
+    if (buttonAdded) {
+      return;
+    }
+    // If the button has already been added and kbaTileset becomes true,
+    // remove the button from the toolbar
 
-      // Make the table draggable
-      makeDraggable(table);
-    } else {
-      // Remove the table
-      if (table) {
-        table.remove();
-        table = null;
+    const toolbar = document.querySelector("div.cesium-viewer-toolbar");
+    const modeButton = document.querySelector(
+      "span.cesium-sceneModePicker-wrapper"
+    );
+    myButton = document.createElement("button");
+    myButton.classList.add("cesium-button", "cesium-toolbar-button");
+    myButton.setAttribute("title", "Information om byggnadstyper");
+
+    // Create a <span> element for the Iconify icon
+    const iconSpan = document.createElement("span");
+    iconSpan.classList.add("infoNavBtn");
+    iconSpan.setAttribute("data-icon", "mdi:camera");
+
+    // Append the icon to the button
+    myButton.appendChild(iconSpan);
+    const draggableLsCard = document.getElementById(
+      "draggableLayerSwitcherCard"
+    );
+
+    // Check the condition before inserting the button into the toolbar
+    if (newState.defaultTileset && !newState.kbaTileset) {
+      // Insert the button into the toolbar
+      toolbar.insertBefore(myButton, modeButton);
+      buttonAdded = true; // Set the flag to indicate that the button has been added
+    }
+
+    makeDraggable(draggableLsCard);
+
+    // Function to create and toggle the table
+    function toggleTable(stateEvent) {
+      if (!tableShown && stateEvent.defaultTileset) {
+        // Create the table element
+        table = document.createElement("table");
+        table.classList.add("infoTable");
+
+        updateTableContent();
+
+        // Append the table to the document body or any other desired location
+        document.body.appendChild(table);
+        tableShown = true;
+
+        // Make the table draggable
+        makeDraggable(table);
+      } else {
+        // Remove the table
+        if (table || newState.kbaTileset) {
+          table?.remove();
+          table = null;
+        }
+        tableShown = false;
       }
-      tableShown = false;
-    }
-  }
-
-  // Add event listener to the icon span to toggle the table when clicked
-  iconSpan.addEventListener("click", toggleTable);
-
-  // Function to make an element draggable
-  function makeDraggable(element) {
-    let pos1 = 0,
-      pos2 = 0,
-      pos3 = 0,
-      pos4 = 0;
-
-    // Function to handle mouse/touch events for dragging
-    function dragMouseDown(e) {
-      e = e || window.event;
-      e.preventDefault();
-      // get the mouse cursor position at startup:
-      pos3 = e.clientX;
-      pos4 = e.clientY;
-      document.onmouseup = closeDragElement;
-      // call a function whenever the cursor moves:
-      document.onmousemove = elementDrag;
     }
 
-    function touchDragStart(e) {
-      e.preventDefault();
-      pos3 = e.touches[0].clientX;
-      pos4 = e.touches[0].clientY;
-      document.addEventListener("touchend", closeDragElement);
-      document.addEventListener("touchmove", touchElementDrag);
-    }
+    document.addEventListener("stateChanged", function (event) {
+      const newState = event.detail;
+      toggleTable(newState);
+    });
 
-    function touchElementDrag(e) {
-      e.preventDefault();
-      pos1 = pos3 - e.touches[0].clientX;
-      pos2 = pos4 - e.touches[0].clientY;
-      pos3 = e.touches[0].clientX;
-      pos4 = e.touches[0].clientY;
-      element.style.top = element.offsetTop - pos2 + "px";
-      element.style.left = element.offsetLeft - pos1 + "px";
-    }
+    iconSpan.addEventListener("click", function () {
+      toggleTable(newState);
+    });
 
-    function elementDrag(e) {
-      e = e || window.event;
-      e.preventDefault();
-      // calculate the new cursor position:
-      pos1 = pos3 - e.clientX;
-      pos2 = pos4 - e.clientY;
-      pos3 = e.clientX;
-      pos4 = e.clientY;
-      // set the element's new position:
-      element.style.top = element.offsetTop - pos2 + "px";
-      element.style.left = element.offsetLeft - pos1 + "px";
-    }
+    // Function to make an element draggable
+    function makeDraggable(element) {
+      let pos1 = 0,
+        pos2 = 0,
+        pos3 = 0,
+        pos4 = 0;
 
-    function closeDragElement() {
-      // stop moving when mouse button is released:
-      document.onmouseup = null;
-      document.onmousemove = null;
-      document.removeEventListener("touchend", closeDragElement);
-      document.removeEventListener("touchmove", touchElementDrag);
-    }
+      // Function to handle mouse/touch events for dragging
+      function dragMouseDown(e) {
+        e = e || window.event;
+        e.preventDefault();
+        // get the mouse cursor position at startup:
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        // call a function whenever the cursor moves:
+        document.onmousemove = elementDrag;
+      }
 
-    // Event listeners for starting the drag
-    element.onmousedown = dragMouseDown;
-    element.ontouchstart = touchDragStart;
-  }
+      function touchDragStart(e) {
+        e.preventDefault();
+        pos3 = e.touches[0].clientX;
+        pos4 = e.touches[0].clientY;
+        document.addEventListener("touchend", closeDragElement);
+        document.addEventListener("touchmove", touchElementDrag);
+      }
+
+      function touchElementDrag(e) {
+        e.preventDefault();
+        pos1 = pos3 - e.touches[0].clientX;
+        pos2 = pos4 - e.touches[0].clientY;
+        pos3 = e.touches[0].clientX;
+        pos4 = e.touches[0].clientY;
+        element.style.top = element.offsetTop - pos2 + "px";
+        element.style.left = element.offsetLeft - pos1 + "px";
+      }
+
+      function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+        // calculate the new cursor position:
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        // set the element's new position:
+        element.style.top = element.offsetTop - pos2 + "px";
+        element.style.left = element.offsetLeft - pos1 + "px";
+      }
+
+      function closeDragElement() {
+        // stop moving when mouse button is released:
+        document.onmouseup = null;
+        document.onmousemove = null;
+        document.removeEventListener("touchend", closeDragElement);
+        document.removeEventListener("touchmove", touchElementDrag);
+      }
+
+      // Event listeners for starting the drag
+      element.onmousedown = dragMouseDown;
+      element.ontouchstart = touchDragStart;
+    }
+  });
 });
 document.addEventListener("DOMContentLoaded", function () {
   const pathElement = document.querySelector(
