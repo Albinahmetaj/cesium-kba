@@ -30,11 +30,11 @@
     "December": "December"
   },
   "buildingColors": {
-    "Kungsbacka Kommun": "Kungsbacka Municipality",
-    "Parkering": "Parking",
-    "Hus": "House",
+    "Kungsbacka Kommun": "Kungsbacka Municipalities",
+    "Parkering": "Parking lots",
+    "Hus": "Houses",
     "Lägenheter": "Apartments",
-    "Skola": "School",
+    "Skola": "Schools",
     "Affärer": "Shops"
   },
   "tableTitleKey": "Buildingtypes"

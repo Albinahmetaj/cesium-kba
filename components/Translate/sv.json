@@ -31,10 +31,10 @@
   },
   "buildingColors": {
     "Kungsbacka Kommun": "Kungsbacka Kommun",
-    "Parkering": "Parkering",
+    "Parkering": "Parkeringar",
     "Hus": "Hus",
     "Lägenheter": "Lägenheter",
-    "Skola": "Skola",
+    "Skola": "Skolor",
     "Affärer": "Affärer"
   },
   "tableTitleKey": "Byggnadstyper"

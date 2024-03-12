@@ -9,6 +9,8 @@ export function updateTableContent() {
   // create table title called byggnadstyper
   const tableTitle = document.createElement("h4");
   tableTitle.id = "infoTableTitle";
+  tableTitle.style.textDecoration = "underline";
+  tableTitle.style.margin = "0 0 10px 0";
 
   const translatedTitle = i18next.t("tableTitleKey");
   tableTitle.textContent = translatedTitle;
