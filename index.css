@@ -32,6 +32,8 @@ body,
   min-height: 300px;
   max-width: 300px;
   display: none;
+  touch-action: none;
+  user-select: none;
 }
 
 h3 {
@@ -172,9 +174,6 @@ h3 {
   color: white;
   min-width: 250px;
   max-width: 250px;
-}
-
-.draggable-element {
   touch-action: none;
   user-select: none;
 }
@@ -203,6 +202,8 @@ h3 {
   height: auto;
   display: none;
   text-align: center;
+  touch-action: none;
+  user-select: none;
 }
 .timeChangerNavBtn {
   display: inline-block;
