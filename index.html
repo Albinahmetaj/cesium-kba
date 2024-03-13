@@ -5,6 +5,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link
+      href="https://cesium.com/downloads/cesiumjs/releases/1.114/Build/Cesium/Widgets/widgets.css"
+      rel="stylesheet"
+    />
+    <link href="./index.css" rel="stylesheet" />
     <script src="https://cesium.com/downloads/cesiumjs/releases/1.114/Build/Cesium/Cesium.js"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/i18next/23.9.0/i18next.min.js"
@@ -13,12 +18,7 @@
       referrerpolicy="no-referrer"
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-xhr-backend/3.2.2/i18nextXHRBackend.min.js" integrity="sha512-MUYO1+VEcFMYb/UEtAGdOArYvDh/yth3ZQwfmdttD9CURHAMzkfCZPRYIbXNCbOQWSjOXjjj5xwjEk/gEMXCdg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script type="module" src="./components/Translate/translate.js"></script>
-    <link
-      href="https://cesium.com/downloads/cesiumjs/releases/1.114/Build/Cesium/Widgets/widgets.css"
-      rel="stylesheet"
-    />
-    <link href="./index.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
   </head>
   <body>
     <div class="country-flags">
@@ -37,7 +37,7 @@
     <div id="cesiumContainer">
       <img src="./assets/Logo.png" class="kbaLogo" />
     </div>
-  <div id="draggableLayerSwitcherCard">
+  <div id="draggableLayerSwitcherCard" class="draggable-element">
       <div class="layer-switcher-header">
         <h3 id="layer-switcher-title"></h3>
         <hr />
@@ -56,30 +56,32 @@
         </div>
     </div>
       
-    <div id="timeChangerCard">
+    <div id="timeChangerCard" class="draggable-element">
         <div id="timeDateTogglev"></div>
         <button id="summerButton"></button>
         <button id="winterButton"></button>
         
         <div id="monthContainer">
           <label id="monthLabel" for="monthSlider"></label>
-          <input type="range" id="monthSlider" min="1" max="12" step="1" value="0">
+          <input type="range" class="ignoreSliderDrag" id="monthSlider" min="1" max="12" step="1" value="0">
           <span id="monthOutput"></span>
       </div>
       <div id="dayContainer">
           <label id="dayLabel" for="daySlider"></label>
-          <input type="range" id="daySlider" min="1" max="31" step="1" value="1">
+          <input type="range" class="ignoreSliderDrag" id="daySlider" min="1" max="31" step="1" value="1">
           <span id="dayOutput"></span>
       </div>
       <div id="hourContainer">
           <label id="hourLabel" for="hourSlider"></label>
-          <input type="range" id="hourSlider" min="0" max="23" step="1" value="10">
+          <input type="range" class="ignoreSliderDrag" id="hourSlider" min="0" max="23" step="1" value="10">
           <span id="hourOutput"></span>
       </div>
     </div>
       <script type="module" src="index.js"></script>
-        <script type="module" src="./components/newMouseEvent.js"></script>
-        <script type="module" src="./components/navStyle.js"></script>
-        <script type="module" src="./components/Timechanger/timeChanger.js"></script>
+      <script type="module" src="./components/Translate/translate.js"></script>
+      <script type="module" src="./components/DraggableCards.js"></script>
+      <script type="module" src="./components/newMouseEvent.js"></script>
+      <script type="module" src="./components/navStyle.js"></script>
+      <script type="module" src="./components/Timechanger/timeChanger.js"></script>
   </body>
 </html>

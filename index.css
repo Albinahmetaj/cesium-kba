@@ -160,7 +160,7 @@ h3 {
   mask-size: 100% 100%;
 }
 
-.infoTable {
+#infoTable {
   position: absolute;
   top: 5%;
   right: 10rem;
@@ -172,6 +172,11 @@ h3 {
   color: white;
   min-width: 250px;
   max-width: 250px;
+}
+
+.draggable-element {
+  touch-action: none;
+  user-select: none;
 }
 
 .color-circle {
