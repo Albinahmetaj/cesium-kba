@@ -29,8 +29,6 @@ body,
   border-radius: 10px;
   border: 5px solid #cbd4dc;
   color: white;
-  min-height: 300px;
-  max-width: 300px;
   display: none;
   touch-action: none;
   user-select: none;
@@ -43,8 +41,6 @@ h3 {
 .layer-switcher {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
   gap: 10px;
 }
 

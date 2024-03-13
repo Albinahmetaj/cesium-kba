@@ -74,9 +74,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Append the icon to the button
     myButton.appendChild(iconSpan);
-    const draggableLsCard = document.getElementById(
-      "draggableLayerSwitcherCard"
-    );
 
     // Check the condition before inserting the button into the toolbar
     if (newState.defaultTileset && !newState.kbaTileset) {
