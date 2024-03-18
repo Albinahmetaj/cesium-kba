@@ -49,6 +49,14 @@ document.addEventListener("DOMContentLoaded", function () {
         myButton = null; // Clear the reference
         buttonAdded = false; // Reset the flag
       }
+
+      // Hide or remove the table if kbaTileset is true
+      if (table) {
+        table.remove();
+        table = null;
+        tableShown = false;
+      }
+
       return;
     }
 
@@ -56,8 +64,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (buttonAdded) {
       return;
     }
-    // If the button has already been added and kbaTileset becomes true,
-    // remove the button from the toolbar
 
     const toolbar = document.querySelector("div.cesium-viewer-toolbar");
     const modeButton = document.querySelector(
@@ -67,53 +73,48 @@ document.addEventListener("DOMContentLoaded", function () {
     myButton.classList.add("cesium-button", "cesium-toolbar-button");
     myButton.setAttribute("title", "Information om byggnadstyper");
 
-    // Create a <span> element for the Iconify icon
     const iconSpan = document.createElement("span");
     iconSpan.classList.add("infoNavBtn");
     iconSpan.setAttribute("data-icon", "mdi:camera");
 
-    // Append the icon to the button
     myButton.appendChild(iconSpan);
 
-    // Check the condition before inserting the button into the toolbar
     if (newState.defaultTileset && !newState.kbaTileset) {
-      // Insert the button into the toolbar
       toolbar.insertBefore(myButton, modeButton);
-      buttonAdded = true; // Set the flag to indicate that the button has been added
+      buttonAdded = true;
     }
 
-    // Function to create and toggle the table
-    function toggleTable(stateEvent) {
-      if (!tableShown && stateEvent.defaultTileset) {
-        // Create the table element
-        table = document.createElement("table");
-        table.id = "infoTable";
-        table.classList.add("draggable-element");
-
-        updateTableContent();
-        // Append the table to the document body or any other desired location
-        document.body.appendChild(table);
-        tableShown = true;
+    function toggleTable() {
+      if (newState.defaultTileset) {
+        if (!tableShown) {
+          // Create the table if it's not already shown
+          table = document.createElement("table");
+          table.id = "infoTable";
+          table.classList.add("draggable-element");
+          updateTableContent();
+          document.body.appendChild(table);
+          tableShown = true;
+        } else {
+          // Hide the table if it's already shown
+          table.style.display = "none";
+          tableShown = false;
+        }
       } else {
-        // Remove the table
-        if (table || newState.kbaTileset) {
-          table?.remove();
+        // Remove the table if defaultTileset is false
+        if (table) {
+          table.remove();
           table = null;
         }
         tableShown = false;
       }
     }
 
-    document.addEventListener("stateChanged", function (event) {
-      const newState = event.detail;
-      toggleTable(newState);
-    });
-
     iconSpan.addEventListener("click", function () {
       toggleTable(newState);
     });
   });
 });
+
 document.addEventListener("DOMContentLoaded", function () {
   const pathElement = document.querySelector(
     'path[d="M16,1.466C7.973,1.466,1.466,7.973,1.466,16c0,8.027,6.507,14.534,14.534,14.534c8.027,0,14.534-6.507,14.534-14.534C30.534,7.973,24.027,1.466,16,1.466z M17.328,24.371h-2.707v-2.596h2.707V24.371zM17.328,19.003v0.858h-2.707v-1.057c0-3.19,3.63-3.696,3.63-5.963c0-1.034-0.924-1.826-2.134-1.826c-1.254,0-2.354,0.924-2.354,0.924l-1.541-1.915c0,0,1.519-1.584,4.137-1.584c2.487,0,4.796,1.54,4.796,4.136C21.156,16.208,17.328,16.627,17.328,19.003z"]'
