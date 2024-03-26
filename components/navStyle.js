@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener("stateChanged", function (event) {
     const newState = event.detail;
 
-    if (buttonAdded && newState.kbaTileset) {
+    if (buttonAdded && !newState.defaultTileset) {
       if (myButton && myButton.parentNode) {
         myButton.parentNode.removeChild(myButton);
         myButton = null; // Clear the reference
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     myButton.appendChild(iconSpan);
 
-    if (newState.defaultTileset && !newState.kbaTileset) {
+    if (newState.defaultTileset) {
       toolbar.insertBefore(myButton, modeButton);
       buttonAdded = true;
     }

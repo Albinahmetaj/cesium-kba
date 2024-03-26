@@ -22,7 +22,7 @@ function updateContent() {
       i18next.t("lsTitle");
     document.getElementById("default-content").innerText =
       i18next.t("lsDefaultContent");
-    document.getElementById("layer-switcher-content").innerText =
+    document.getElementById("kba-content").innerText =
       i18next.t("lsKbaContent");
     document.getElementById("timeDateTogglev").innerText =
       i18next.t("timeChangerTitle");
@@ -31,6 +31,8 @@ function updateContent() {
     document.getElementById("dayLabel").innerText = i18next.t("timeChangerDay");
     document.getElementById("hourLabel").innerText =
       i18next.t("timeChangerHour");
+    document.getElementById("nidingen-content").innerText =
+      i18next.t("lsNidingenContent");
   } catch (error) {
     console.log(error);
   }

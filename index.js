@@ -10,7 +10,7 @@ export const viewer = new Cesium.Viewer("cesiumContainer", {
   timeline: false,
   animation: false,
 });
-let defaultTileset, kbaTileset;
+let defaultTileset, kbaTileset, nidingenTileset;
 
 const shadowMap = viewer.shadowMap;
 shadowMap.maximumDistance = 5000.0;
@@ -20,12 +20,14 @@ shadowMap.darkness = 0.6;
 const toggleCheck = {
   defaultTileset: false,
   kbaTileset: true,
+  nidingenTileset: false,
 };
 
 const state = { ...toggleCheck };
 
 const defaultCheckbox = document.getElementById("toggleDefaultTileset");
 const kbaCheckbox = document.getElementById("toggleKBATileset");
+const nidingenCheckbox = document.getElementById("toggleNidingenTileset");
 
 async function applyViewer() {
   try {
@@ -52,10 +54,12 @@ async function applyViewer() {
 
     defaultTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
     kbaTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2459461);
+    nidingenTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
 
     // Add the default and KBA tilesets to the viewer's scene
     viewer.scene.primitives.add(defaultTileset);
     viewer.scene.primitives.add(kbaTileset);
+    viewer.scene.primitives.add(nidingenTileset);
 
     // Apply the default style if it exists
     const kbaExtras = kbaTileset.asset.extras;
@@ -78,6 +82,9 @@ async function applyViewer() {
     // Initially show the KBA tileset (assuming it's visible by default)
     if (kbaTileset) {
       kbaTileset.show = state.kbaTileset;
+    }
+    if (nidingenTileset) {
+      nidingenTileset.show = state.nidingenTileset;
     }
   } catch (error) {
     console.log(error);
@@ -107,8 +114,17 @@ async function updateTilesetVisibility() {
       }
     }
 
+    if (nidingenTileset) {
+      nidingenTileset.show = state.nidingenTileset;
+      viewer.flyTo;
+      // close the infobox when the tileset is hidden
+      if (!state.nidingenTileset) {
+        viewer.selectedEntity = undefined;
+      }
+    }
+
     // Update terrain provider based on which tileset is shown
-    if (state.defaultTileset) {
+    if (state.defaultTileset || state.nidingenTileset) {
       // Set terrainProvider for default tileset
 
       viewer.terrainProvider =
@@ -123,45 +139,62 @@ async function updateTilesetVisibility() {
   }
 }
 
-function updateCheckboxState() {
-  defaultCheckbox.disabled = state.defaultTileset && !state.kbaTileset;
-  kbaCheckbox.disabled = state.kbaTileset && !state.defaultTileset;
-}
+// function updateCheckboxState() {
+//   defaultCheckbox.disabled = state.defaultTileset && !state.kbaTileset;
+//   kbaCheckbox.disabled = state.kbaTileset && !state.defaultTileset;
+// }
 
-defaultCheckbox.addEventListener("change", function (event) {
-  if (event.target.checked) {
-    // If the default checkbox is checked, uncheck the KBA checkbox
-    kbaCheckbox.checked = false;
-    state.defaultTileset = true;
-    state.kbaTileset = false;
-  } else {
-    // If the default checkbox is unchecked, prevent it from being turned off if KBA is off
-    if (!kbaCheckbox.checked) {
-      event.preventDefault();
-      return;
-    }
-    state.defaultTileset = false;
-  }
+// defaultCheckbox.addEventListener("change", function (event) {
+//   if (event.target.checked) {
+//     // If the default checkbox is checked, uncheck the KBA checkbox
+//     kbaCheckbox.checked = false;
+//     state.defaultTileset = true;
+//     state.kbaTileset = false;
+//   } else {
+//     // If the default checkbox is unchecked, prevent it from being turned off if KBA is off
+//     if (!kbaCheckbox.checked) {
+//       event.preventDefault();
+//       return;
+//     }
+//     state.defaultTileset = false;
+//   }
+
+//   updateTilesetVisibility();
+//   updateCheckboxState();
+// });
+
+// kbaCheckbox.addEventListener("change", function (event) {
+//   if (event.target.checked) {
+//     // If the KBA checkbox is checked, uncheck the default checkbox
+//     defaultCheckbox.checked = false;
+//     state.defaultTileset = false;
+//     state.kbaTileset = true;
+//   } else {
+//     // If the KBA checkbox is unchecked, prevent it from being turned off if default is off
+//     if (!defaultCheckbox.checked) {
+//       event.preventDefault();
+//       return;
+//     }
+//     state.kbaTileset = false;
+//   }
+
+//   updateTilesetVisibility();
+//   updateCheckboxState();
+// });
+
+defaultCheckbox.addEventListener("change", function () {
+  state.defaultTileset = defaultCheckbox.checked;
   updateTilesetVisibility();
-  updateCheckboxState();
 });
 
-kbaCheckbox.addEventListener("change", function (event) {
-  if (event.target.checked) {
-    // If the KBA checkbox is checked, uncheck the default checkbox
-    defaultCheckbox.checked = false;
-    state.defaultTileset = false;
-    state.kbaTileset = true;
-  } else {
-    // If the KBA checkbox is unchecked, prevent it from being turned off if default is off
-    if (!defaultCheckbox.checked) {
-      event.preventDefault();
-      return;
-    }
-    state.kbaTileset = false;
-  }
+kbaCheckbox.addEventListener("change", function () {
+  state.kbaTileset = kbaCheckbox.checked;
   updateTilesetVisibility();
-  updateCheckboxState();
+});
+
+nidingenCheckbox.addEventListener("change", function () {
+  state.nidingenTileset = nidingenCheckbox.checked;
+  updateTilesetVisibility();
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -196,7 +229,19 @@ document.addEventListener("DOMContentLoaded", function () {
     tableShown = !tableShown; // Toggle the visibility flag
   });
 });
-
+window.flyCameraToNidingen = function () {
+  try {
+    viewer.camera.flyTo({
+      destination: Cesium.Cartesian3.fromDegrees(11.913, 57.295, 700),
+      orientation: {
+        heading: Cesium.Math.toRadians(-30),
+        pitch: Cesium.Math.toRadians(-30),
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
 // Initially set checkbox state
-updateCheckboxState();
+// updateCheckboxState();
 applyViewer();
