@@ -12,6 +12,7 @@ interact("#draggableLayerSwitcherCard").draggable({
       endOnly: true,
     }),
   ],
+  ignoreFrom: ".ignoreCameraDrag",
   // enable autoScroll
   autoScroll: true,
   listeners: {

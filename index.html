@@ -21,6 +21,7 @@
     <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
   </head>
   <body>
+
     <div class="country-flags">
       <div
         id="sv-flag"
@@ -34,27 +35,43 @@
       >
       </div>
     </div>
+
     <div id="cesiumContainer">
       <img src="./assets/Logo.png" class="kbaLogo" />
     </div>
-  <div id="draggableLayerSwitcherCard" class="draggable-element">
+
+    <div id="draggableLayerSwitcherCard" class="draggable-element">
       <div class="layer-switcher-header">
         <h3 id="layer-switcher-title"></h3>
         <hr />
       </div>
       <div class="layer-switcher">
-           <label>
+          <label style="width: fit-content;">
             <input type="checkbox" id="toggleDefaultTileset" class="check">
             <span id="default-content"></span>
           </input>
           </label>
-          <label>
+         <label style="width: fit-content;">
             <input type="checkbox" id="toggleKBATileset" class="check" checked>
-            <span id="layer-switcher-content"></span>
+            <span id="kba-content"></span>
           </input>
           </label>
+          <div class="toggle-nidingen-row">
+            <label style="width: fit-content;">
+              <input type="checkbox" id="toggleNidingenTileset" class="check">
+              <span id="nidingen-content"></span>
+            </input>
+          </label>
+          <hr />
+          <div
+          id="nidingenCameraButton"
+          class="ignoreCameraDrag"
+          onclick="flyCameraToNidingen()"
+          >
         </div>
-    </div>
+      </div>
+        </div>
+      </div>
       
     <div id="timeChangerCard" class="draggable-element">
         <div id="timeDateTogglev"></div>
@@ -77,13 +94,14 @@
           <span id="hourOutput"></span>
       </div>
     </div>
+    
       <script type="module" src="index.js"></script>
       <script type="module" src="./components/Translate/translate.js"></script>
       <script type="module" src="./components/CardInteraction/Resizeable.js"></script>
-
       <script type="module" src="./components/CardInteraction/Draggable.js"></script>
       <script type="module" src="./components/newMouseEvent.js"></script>
       <script type="module" src="./components/navStyle.js"></script>
       <script type="module" src="./components/Timechanger/timeChanger.js"></script>
+      
   </body>
 </html>
