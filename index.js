@@ -54,7 +54,7 @@ async function applyViewer() {
 
     defaultTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
     kbaTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2459461);
-    nidingenTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
+    nidingenTileset = await Cesium.Cesium3DTileset.fromIonAssetId(75343);
 
     // Add the default and KBA tilesets to the viewer's scene
     viewer.scene.primitives.add(defaultTileset);
@@ -124,13 +124,18 @@ async function updateTilesetVisibility() {
     }
 
     // Update terrain provider based on which tileset is shown
-    if (state.defaultTileset || state.nidingenTileset) {
+    if (state.defaultTileset) {
       // Set terrainProvider for default tileset
 
       viewer.terrainProvider =
         await Cesium.CesiumTerrainProvider.fromIonAssetId(1);
-    } else {
+    }
+    if (state.kbaTileset) {
       // Set terrainProvider for KBA tileset
+      viewer.terrainProvider = new Cesium.EllipsoidTerrainProvider();
+    }
+    if (state.nidingenTileset) {
+      // Set terrainProvider for Nidingen tileset
       viewer.terrainProvider = new Cesium.EllipsoidTerrainProvider();
     }
     document.dispatchEvent(new CustomEvent("stateChanged", { detail: state }));
