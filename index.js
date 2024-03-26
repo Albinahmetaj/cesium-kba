@@ -54,12 +54,12 @@ async function applyViewer() {
 
     defaultTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
     kbaTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2459461);
-    nidingenTileset = await Cesium.Cesium3DTileset.fromIonAssetId(75343);
+    // nidingenTileset = await Cesium.Cesium3DTileset.fromIonAssetId(75343);
 
     // Add the default and KBA tilesets to the viewer's scene
     viewer.scene.primitives.add(defaultTileset);
     viewer.scene.primitives.add(kbaTileset);
-    viewer.scene.primitives.add(nidingenTileset);
+    // viewer.scene.primitives.add(nidingenTileset);
 
     // Apply the default style if it exists
     const kbaExtras = kbaTileset.asset.extras;
@@ -83,9 +83,9 @@ async function applyViewer() {
     if (kbaTileset) {
       kbaTileset.show = state.kbaTileset;
     }
-    if (nidingenTileset) {
-      nidingenTileset.show = state.nidingenTileset;
-    }
+    // if (nidingenTileset) {
+    //   nidingenTileset.show = state.nidingenTileset;
+    // }
   } catch (error) {
     console.log(error);
   }
@@ -114,14 +114,14 @@ async function updateTilesetVisibility() {
       }
     }
 
-    if (nidingenTileset) {
-      nidingenTileset.show = state.nidingenTileset;
-      viewer.flyTo;
-      // close the infobox when the tileset is hidden
-      if (!state.nidingenTileset) {
-        viewer.selectedEntity = undefined;
-      }
-    }
+    // if (nidingenTileset) {
+    //   nidingenTileset.show = state.nidingenTileset;
+
+    //   // close the infobox when the tileset is hidden
+    //   if (!state.nidingenTileset) {
+    //     viewer.selectedEntity = undefined;
+    //   }
+    // }
 
     // Update terrain provider based on which tileset is shown
     if (state.defaultTileset) {
@@ -134,10 +134,10 @@ async function updateTilesetVisibility() {
       // Set terrainProvider for KBA tileset
       viewer.terrainProvider = new Cesium.EllipsoidTerrainProvider();
     }
-    if (state.nidingenTileset) {
-      // Set terrainProvider for Nidingen tileset
-      viewer.terrainProvider = new Cesium.EllipsoidTerrainProvider();
-    }
+    // if (state.nidingenTileset) {
+    //   // Set terrainProvider for Nidingen tileset
+    //   viewer.terrainProvider = new Cesium.EllipsoidTerrainProvider();
+    // }
     document.dispatchEvent(new CustomEvent("stateChanged", { detail: state }));
   } catch (error) {
     console.log(error);
@@ -197,10 +197,10 @@ kbaCheckbox.addEventListener("change", function () {
   updateTilesetVisibility();
 });
 
-nidingenCheckbox.addEventListener("change", function () {
-  state.nidingenTileset = nidingenCheckbox.checked;
-  updateTilesetVisibility();
-});
+// nidingenCheckbox.addEventListener("change", function () {
+//   state.nidingenTileset = nidingenCheckbox.checked;
+//   updateTilesetVisibility();
+// });
 
 document.addEventListener("DOMContentLoaded", function () {
   const toolbar = document.querySelector("div.cesium-viewer-toolbar");
