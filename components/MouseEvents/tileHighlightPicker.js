@@ -1,4 +1,4 @@
-import { viewer } from "../index.js";
+import { viewer } from "../../index.js";
 
 const nameOverlay = document.createElement("div");
 viewer.container.appendChild(nameOverlay);

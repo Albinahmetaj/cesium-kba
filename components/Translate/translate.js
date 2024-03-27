@@ -1,5 +1,5 @@
 import { updateDate } from "../Timechanger/timeChanger.js";
-import { updateTableContent } from "../navStyle.js";
+import { updateTableContent } from "../style/navStyle.js";
 
 function initializeApp() {
   i18next.use(i18nextXHRBackend).init(
