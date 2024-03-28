@@ -17,10 +17,11 @@ export const viewer = new Cesium.Viewer("cesiumContainer", {
   terrainShadows: Cesium.ShadowMode.ENABLED,
   timeline: false,
   animation: false,
+  baseLayerPicker: false,
+  navigationHelpButton: false,
 });
 // The different tiles that can be shown
 let defaultTileset, kbaTileset, nidingenTileset;
-
 // Set the maximum distance for the shadow map
 const shadowMap = viewer.shadowMap;
 shadowMap.maximumDistance = 5000.0;
@@ -182,28 +183,35 @@ kbaCheckbox.addEventListener("change", function () {
 // });
 
 // an event listener to toggle between on and off for the visibility of the layer switcher card.
-document.addEventListener("DOMContentLoaded", function () {
-  const toolbar = document.querySelector("div.cesium-viewer-toolbar");
-  const modeButton = document.querySelector(
-    "span.cesium-sceneModePicker-wrapper"
-  );
-  const myButton = document.createElement("button");
-  myButton.classList.add("cesium-button", "cesium-toolbar-button");
-  myButton.setAttribute("title", "Lagerhanteraren");
+const toolbar = document.querySelector("div.cesium-viewer-toolbar");
+const modeButton = document.querySelector(
+  "span.cesium-sceneModePicker-wrapper"
+);
+const layerSwitcherButton = document.createElement("button");
+layerSwitcherButton.classList.add("cesium-button", "cesium-toolbar-button");
+layerSwitcherButton.setAttribute("title", "Lagerhanteraren");
 
+// Function to update the tooltip title of the time changer button based on the current language
+export function updateLayerSwitcherToolTipTitle() {
+  if (layerSwitcherButton) {
+    layerSwitcherButton.setAttribute("title", i18next.t("lsTooltipTitle"));
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
   const iconSpan = document.createElement("span");
   iconSpan.classList.add("lsNavBtn");
   iconSpan.setAttribute("data-icon", "mdi:camera");
 
-  myButton.appendChild(iconSpan);
-  toolbar.insertBefore(myButton, modeButton);
+  layerSwitcherButton.appendChild(iconSpan);
+  toolbar.insertBefore(layerSwitcherButton, modeButton);
 
   let tableShown = false;
   const layerSwitcherCard = document.getElementById(
     "draggableLayerSwitcherCard"
   );
 
-  myButton.addEventListener("click", function () {
+  layerSwitcherButton.addEventListener("click", function () {
     if (tableShown) {
       layerSwitcherCard.style.display = "none";
     } else {

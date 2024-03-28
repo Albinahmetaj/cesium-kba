@@ -6,10 +6,20 @@ const toolbar = document.querySelector("div.cesium-viewer-toolbar");
 const modeButton = document.querySelector(
   "span.cesium-sceneModePicker-wrapper"
 );
-// creates the element for the button
-const myButton = document.createElement("button");
-myButton.classList.add("cesium-button", "cesium-toolbar-button");
-myButton.setAttribute("title", "Solstudier");
+// creates the element for the timechanger button in the toolbar
+const timeChangerButton = document.createElement("button");
+timeChangerButton.classList.add("cesium-button", "cesium-toolbar-button");
+timeChangerButton.setAttribute("title", "Solstudie");
+
+// Function to update the tooltip title of the time changer button based on the current language
+export function updateTimeChangerTooltipTitle() {
+  if (timeChangerButton) {
+    timeChangerButton.setAttribute(
+      "title",
+      i18next.t("timeChangerTooltipTitle")
+    );
+  }
+}
 
 // Create a <span> element for the Iconify icon
 const iconSpan = document.createElement("span");
@@ -17,14 +27,14 @@ iconSpan.classList.add("timeChangerNavBtn");
 iconSpan.setAttribute("data-icon", "mdi:camera");
 
 // Append the icon to the button
-myButton.appendChild(iconSpan);
-toolbar.insertBefore(myButton, modeButton);
+timeChangerButton.appendChild(iconSpan);
+toolbar.insertBefore(timeChangerButton, modeButton);
 
 let tableShown = false;
 const timeChanger = document.getElementById("timeChangerCard");
 
 // Event listener to toggle the time changer card
-myButton.addEventListener("click", function () {
+timeChangerButton.addEventListener("click", function () {
   if (tableShown) {
     timeChanger.style.display = "none"; // Hide the time changer
   } else {

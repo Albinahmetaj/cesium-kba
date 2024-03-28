@@ -1,6 +1,10 @@
 // imports
-import { updateDate } from "../Timechanger/timeChanger.js";
-import { updateTableContent } from "../style/navStyle.js";
+import {
+  updateDate,
+  updateTimeChangerTooltipTitle,
+} from "../Timechanger/timeChanger.js";
+import { updateTableContent, updateToolTipTitles } from "../style/navStyle.js";
+import { updateLayerSwitcherToolTipTitle } from "../../index.js";
 
 // This file is responsible for handling the translation of the application.
 // It uses the i18next library to load the translation files and update the content of the application.
@@ -63,10 +67,12 @@ window.changeLanguage = function (lang) {
       updateContent();
       updateDate();
       updateTableContent();
+      updateTimeChangerTooltipTitle();
+      updateLayerSwitcherToolTipTitle();
+      updateToolTipTitles();
     });
   } catch (error) {
     console.log(error);
   }
 };
-
 initializeApp();

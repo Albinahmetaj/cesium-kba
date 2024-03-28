@@ -38,5 +38,10 @@
     "Skola": "Schools",
     "Affärer": "Shops"
   },
-  "tableTitleKey": "Buildingtypes"
+  "tableTitleKey": "Buildingtypes",
+  "homeButtonToolTipTitle": "Reset view to start position",
+  "searchBarPlaceholder": "Enter an address or landmark...",
+  "timeChangerTooltipTitle": "Solstice",
+  "lsTooltipTitle": "Layerswitcher",
+  "buildingInfoToolTipTitle": "Building information"
 }

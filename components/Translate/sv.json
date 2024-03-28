@@ -38,5 +38,10 @@
     "Skola": "Skolor",
     "Affärer": "Affärer"
   },
-  "tableTitleKey": "Byggnadstyper"
+  "tableTitleKey": "Byggnadstyper",
+  "homeButtonToolTipTitle": "Återställ vy till startposition",
+  "searchBarPlaceholder": "Ange en adress eller ett landmärke...",
+  "timeChangerTooltipTitle": "Solstudie",
+  "lsTooltipTitle": "Lagerhanteraren",
+  "buildingInfoToolTipTitle": "Byggnadsinformation"
 }
