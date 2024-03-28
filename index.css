@@ -148,9 +148,6 @@ h3 {
   right: 7rem;
 }
 
-/* path[d="M16,1.466C7.973,1.466,1.466,7.973,1.466,16c0,8.027,6.507,14.534,14.534,14.534c8.027,0,14.534-6.507,14.534-14.534C30.534,7.973,24.027,1.466,16,1.466z M17.328,24.371h-2.707v-2.596h2.707V24.371zM17.328,19.003v0.858h-2.707v-1.057c0-3.19,3.63-3.696,3.63-5.963c0-1.034-0.924-1.826-2.134-1.826c-1.254,0-2.354,0.924-2.354,0.924l-1.541-1.915c0,0,1.519-1.584,4.137-1.584c2.487,0,4.796,1.54,4.796,4.136C21.156,16.208,17.328,16.627,17.328,19.003z"] {
-  display: none;
-} */
 .infoNavBtn {
   display: inline-block;
   width: 2.3em;
@@ -238,10 +235,6 @@ h3 {
   margin-right: 5px;
 }
 
-/* 
-make a glow effect on hover for summer and winter buttons
-*/
-
 #winterButton {
   display: inline-block;
   width: 2.2em;
@@ -259,13 +252,11 @@ make a glow effect on hover for summer and winter buttons
 }
 
 #summerButton.active {
-  /* Style for active summer button */
-  background-color: #f7e522; /* Change border color to green */
+  background-color: #f7e522;
 }
 
 #winterButton.active {
-  /* Style for active winter button */
-  background-color: #46e1ec; /* Change border color to green */
+  background-color: #46e1ec;
 }
 #monthContainer {
   margin-bottom: 15px;
@@ -298,7 +289,7 @@ make a glow effect on hover for summer and winter buttons
   background-size: 100% 100%;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath fill='white' d='M228 175a8 8 0 0 1-10.92-3l-19-33.2A123.23 123.23 0 0 1 162 155.46l5.87 35.22a8 8 0 0 1-6.58 9.21a8.4 8.4 0 0 1-1.29.11a8 8 0 0 1-7.88-6.69l-5.77-34.58a133.06 133.06 0 0 1-36.68 0l-5.77 34.58A8 8 0 0 1 96 200a8.4 8.4 0 0 1-1.32-.11a8 8 0 0 1-6.58-9.21l5.9-35.22a123.23 123.23 0 0 1-36.06-16.69L39 172a8 8 0 1 1-13.94-8l20-35a153.47 153.47 0 0 1-19.3-20a8 8 0 1 1 12.46-10c16.6 20.54 45.64 45 89.78 45s73.18-24.49 89.78-45a8 8 0 1 1 12.44 10a153.47 153.47 0 0 1-19.3 20l20 35a8 8 0 0 1-2.92 11'/%3E%3C/svg%3E");
 }
-/*black glow up effect with a white border around the glow up*/
+
 #nidingenCameraButton:hover {
   box-shadow: 0 0 10px 5px #b7b5b5;
   border-radius: 50%;

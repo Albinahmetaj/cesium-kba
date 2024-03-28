@@ -18,6 +18,7 @@ const buildingColors = {
   Affärer: "red",
 };
 
+// Function to apply basic color style to the default tileset 3d tiles
 export function applyBasicStyle(defaultTileSetStyle) {
   try {
     defaultTileSetStyle.style = new Cesium.Cesium3DTileStyle({

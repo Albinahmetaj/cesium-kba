@@ -1,3 +1,4 @@
+// Code for making a card resizeable through the use of interact.js library.
 interact("#draggableLayerSwitcherCard").resizable({
   edges: { top: true, left: true, bottom: true, right: true },
   listeners: {

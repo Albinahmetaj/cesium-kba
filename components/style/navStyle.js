@@ -1,12 +1,14 @@
+// imports
 import { getBuildingColors, getBuildingColorNames } from "./buildingStyle.js";
-let buttonAdded = false; // Flag to track whether the button has been added
-let myButton = null; // Reference to the button element
-let tableShown = false;
-let table = null;
 
-const colors = getBuildingColors();
+let buttonAdded = false; // Flag to track whether the button has been added
+let buildingTypesButton = null; // Reference to the button element
+let tableShown = false; // Flag to track whether the table is shown
+let table = null; // Reference to the table element
+const colors = getBuildingColors(); // Get the building colors
+
+// Function to update the buildings information body with the building colors
 export function updateTableContent() {
-  // create table title called byggnadstyper
   const tableTitle = document.createElement("h4");
   tableTitle.id = "infoTableTitle";
   tableTitle.style.textDecoration = "underline";
@@ -39,14 +41,15 @@ export function updateTableContent() {
 
   table?.appendChild(tbody);
 }
+// Event listener to toggle the table content when the tilesstate changes
 document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener("stateChanged", function (event) {
     const newState = event.detail;
 
     if (buttonAdded && !newState.defaultTileset) {
-      if (myButton && myButton.parentNode) {
-        myButton.parentNode.removeChild(myButton);
-        myButton = null; // Clear the reference
+      if (buildingTypesButton && buildingTypesButton.parentNode) {
+        buildingTypesButton.parentNode.removeChild(buildingTypesButton);
+        buildingTypesButton = null; // Clear the reference
         buttonAdded = false; // Reset the flag
       }
 
@@ -65,25 +68,27 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
+    // Add the buildingInfo button to the toolbar
     const toolbar = document.querySelector("div.cesium-viewer-toolbar");
     const modeButton = document.querySelector(
       "span.cesium-sceneModePicker-wrapper"
     );
-    myButton = document.createElement("button");
-    myButton.classList.add("cesium-button", "cesium-toolbar-button");
-    myButton.setAttribute("title", "Information om byggnadstyper");
+    buildingTypesButton = document.createElement("button");
+    buildingTypesButton.classList.add("cesium-button", "cesium-toolbar-button");
+    buildingTypesButton.setAttribute("title", "Information om byggnadstyper");
 
     const iconSpan = document.createElement("span");
     iconSpan.classList.add("infoNavBtn");
     iconSpan.setAttribute("data-icon", "mdi:camera");
 
-    myButton.appendChild(iconSpan);
+    buildingTypesButton.appendChild(iconSpan);
 
     if (newState.defaultTileset) {
-      toolbar.insertBefore(myButton, modeButton);
+      toolbar.insertBefore(buildingTypesButton, modeButton);
       buttonAdded = true;
     }
 
+    // Function to toggle the table visibility
     function toggleTable() {
       if (newState.defaultTileset) {
         if (!tableShown) {
@@ -115,6 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+// Eventlistener to replace the Navigation instructions toolbar icon with a mouse icon
 document.addEventListener("DOMContentLoaded", function () {
   const pathElement = document.querySelector(
     'path[d="M16,1.466C7.973,1.466,1.466,7.973,1.466,16c0,8.027,6.507,14.534,14.534,14.534c8.027,0,14.534-6.507,14.534-14.534C30.534,7.973,24.027,1.466,16,1.466z M17.328,24.371h-2.707v-2.596h2.707V24.371zM17.328,19.003v0.858h-2.707v-1.057c0-3.19,3.63-3.696,3.63-5.963c0-1.034-0.924-1.826-2.134-1.826c-1.254,0-2.354,0.924-2.354,0.924l-1.541-1.915c0,0,1.519-1.584,4.137-1.584c2.487,0,4.796,1.54,4.796,4.136C21.156,16.208,17.328,16.627,17.328,19.003z"]'

@@ -1,48 +1,52 @@
+// imports
 import { viewer } from "../../index.js";
 
-document.addEventListener("DOMContentLoaded", function () {
-  const toolbar = document.querySelector("div.cesium-viewer-toolbar");
-  const modeButton = document.querySelector(
-    "span.cesium-sceneModePicker-wrapper"
-  );
-  const myButton = document.createElement("button");
-  myButton.classList.add("cesium-button", "cesium-toolbar-button");
-  myButton.setAttribute("title", "Vinter/Sommar");
+// selects the toolbar and the mode button
+const toolbar = document.querySelector("div.cesium-viewer-toolbar");
+const modeButton = document.querySelector(
+  "span.cesium-sceneModePicker-wrapper"
+);
+// creates the element for the button
+const myButton = document.createElement("button");
+myButton.classList.add("cesium-button", "cesium-toolbar-button");
+myButton.setAttribute("title", "Solstudier");
 
-  // Create a <span> element for the Iconify icon
-  const iconSpan = document.createElement("span");
-  iconSpan.classList.add("timeChangerNavBtn");
-  iconSpan.setAttribute("data-icon", "mdi:camera");
+// Create a <span> element for the Iconify icon
+const iconSpan = document.createElement("span");
+iconSpan.classList.add("timeChangerNavBtn");
+iconSpan.setAttribute("data-icon", "mdi:camera");
 
-  // Append the icon to the button
-  myButton.appendChild(iconSpan);
-  toolbar.insertBefore(myButton, modeButton);
+// Append the icon to the button
+myButton.appendChild(iconSpan);
+toolbar.insertBefore(myButton, modeButton);
 
-  let tableShown = false;
-  const timeChanger = document.getElementById("timeChangerCard");
+let tableShown = false;
+const timeChanger = document.getElementById("timeChangerCard");
 
-  myButton.addEventListener("click", function () {
-    if (tableShown) {
-      timeChanger.style.display = "none"; // Hide the time changer
-    } else {
-      timeChanger.style.display = "block"; // Show the time changer
-    }
-    tableShown = !tableShown; // Toggle the visibility flag
-  });
+// Event listener to toggle the time changer card
+myButton.addEventListener("click", function () {
+  if (tableShown) {
+    timeChanger.style.display = "none"; // Hide the time changer
+  } else {
+    timeChanger.style.display = "block"; // Show the time changer
+  }
+  tableShown = !tableShown; // Toggle the timechanger card
 });
+
+// different variables for the solstice dates, buttons and sliders
 const winterSolstice = new Date(2023, 12, 21); // December 21st, 2023
 const summerSolstice = new Date(2024, 6, 21); // June 21st, 2024
-// let timeDateToggle = document.getElementById("timeDateTogglev");
-let summerButton = document.getElementById("summerButton");
-let winterButton = document.getElementById("winterButton");
-let monthSlider = document.getElementById("monthSlider");
-let monthOutput = document.getElementById("monthOutput");
-let daySlider = document.getElementById("daySlider");
-let dayOutput = document.getElementById("dayOutput");
-let hourSlider = document.getElementById("hourSlider");
-let hourOutput = document.getElementById("hourOutput");
+const summerButton = document.getElementById("summerButton");
+const winterButton = document.getElementById("winterButton");
+const monthSlider = document.getElementById("monthSlider");
+const monthOutput = document.getElementById("monthOutput");
+const daySlider = document.getElementById("daySlider");
+const dayOutput = document.getElementById("dayOutput");
+const hourSlider = document.getElementById("hourSlider");
+const hourOutput = document.getElementById("hourOutput");
 let isSummer = false;
 
+// Event listeners toggle the summer icon and set the date to summer solstice
 summerButton.addEventListener("click", function () {
   isSummer = true;
   summerButton.classList.add("active");
@@ -51,6 +55,7 @@ summerButton.addEventListener("click", function () {
   setDate(6, 21); // June 21st
 });
 
+// Event listeners toggle the winter icon and set the date to winter solstice
 winterButton.addEventListener("click", function () {
   isSummer = false;
   winterButton.classList.add("active");
@@ -59,6 +64,7 @@ winterButton.addEventListener("click", function () {
   setDate(12, 21); // December 21st
 });
 
+// Array of month names
 const monthNames = [
   "January",
   "February",
@@ -79,6 +85,7 @@ monthSlider.addEventListener("input", updateDays);
 daySlider.addEventListener("input", updateDate);
 hourSlider.addEventListener("input", updateDate);
 
+// Function to pad numbers with leading zeros
 function pad(num) {
   return num < 10 ? "0" + num : num;
 }
@@ -103,6 +110,7 @@ export function updateDate() {
       "2023-" + pad(monthSlider.value) + "-" + day + "T" + hour + ":00:00Z";
   }
 
+  // Set the current time of the viewer
   viewer.clockViewModel.currentTime =
     Cesium.JulianDate.fromIso8601(currentTimeString);
 

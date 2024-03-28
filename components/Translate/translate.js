@@ -1,6 +1,11 @@
+// imports
 import { updateDate } from "../Timechanger/timeChanger.js";
 import { updateTableContent } from "../style/navStyle.js";
 
+// This file is responsible for handling the translation of the application.
+// It uses the i18next library to load the translation files and update the content of the application.
+// It also handles the language change event and updates the content accordingly between swedish and english.
+// There are two json files in the components/Translate folder, sv.json and en.json, that contain the translations for the application.
 function initializeApp() {
   i18next.use(i18nextXHRBackend).init(
     {
@@ -10,7 +15,6 @@ function initializeApp() {
       },
     },
     function (err, t) {
-      // Initialize elements with translations
       if (err) return console.log("something went wrong loading", err);
       updateContent();
     }
@@ -53,15 +57,12 @@ window.changeLanguage = function (lang) {
     let selectedFlagDiv = document.getElementById(lang + "-flag");
     selectedFlagDiv.classList.add("selected");
 
-    // Close the info box
     i18next.changeLanguage(lang, function (err, t) {
       // Update UI after language change
       if (err) return console.log("something went wrong loading", err);
       updateContent();
       updateDate();
       updateTableContent();
-
-      // Trigger updateDate function to update the displayed month name
     });
   } catch (error) {
     console.log(error);

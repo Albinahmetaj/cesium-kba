@@ -1,5 +1,10 @@
+// imports
 import { viewer } from "../../index.js";
 
+// This component represents the logic for highlighting a tile when clicked on and hovered over.
+// It also displays the name of the tile in an overlay when hovered over.
+// With dynamic translations in the info box body.
+// Note: This only works for the default tileset as of now. Since there are missing pieces in the other tilesets.
 const nameOverlay = document.createElement("div");
 viewer.container.appendChild(nameOverlay);
 nameOverlay.className = "backdrop";
@@ -97,8 +102,6 @@ silhouetteGreen.uniforms.length = 0.01;
 silhouetteGreen.selected = [];
 
 if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
-  // Silhouettes are supported
-
   viewer.scene.postProcessStages.add(
     Cesium.PostProcessStageLibrary.createSilhouetteStage([
       silhouetteBlue,
@@ -157,14 +160,12 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
     // Highlight newly selected feature
     silhouetteGreen.selected = [pickedFeature];
 
-    // // Set feature infobox description
+    // // Set custom feature infobox description
     // viewer.selectedEntity = selectedEntity;
     // viewer.selectedEntity.name = `ID: ${pickedFeature._batchId}`;
     // selectedEntity.description = createPickedFeatureDescription(pickedFeature);
   }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
 } else {
-  // Silhouettes are not supported. Instead, change the feature color.
-
   // Information about the currently highlighted feature
   const highlighted = {
     feature: undefined,
@@ -230,8 +231,6 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
 
 // Store the last picked feature
 let lastPickedFeature = null;
-
-// Your existing code goes here...
 
 // Function to update info box content based on picked feature and current language
 function updateInfoBoxContent(pickedFeature) {

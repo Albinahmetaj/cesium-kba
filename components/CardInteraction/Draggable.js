@@ -1,3 +1,5 @@
+// Code for making a card draggable through the use of interact.js library.
+
 const positionLS = { x: 0, y: 0 };
 const positionTimeChanger = { x: 0, y: 0 };
 const positionInfo = { x: 0, y: 0 };
@@ -71,10 +73,10 @@ interact("#infoTable").draggable({
   },
 });
 function dragMoveListener(event) {
-  var target = event.target;
+  let target = event.target;
   // keep the dragged position in the data-x/data-y attributes
-  var x = (parseFloat(target.getAttribute("data-x")) || 0) + event.dx;
-  var y = (parseFloat(target.getAttribute("data-y")) || 0) + event.dy;
+  let x = (parseFloat(target.getAttribute("data-x")) || 0) + event.dx;
+  let y = (parseFloat(target.getAttribute("data-y")) || 0) + event.dy;
 
   // translate the element
   target.style.transform = "translate(" + x + "px, " + y + "px)";

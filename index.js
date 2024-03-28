@@ -1,7 +1,15 @@
+// imports
 import { applyBasicStyle } from "./components/style/buildingStyle.js";
+
+// Description: This file contains the main logic for the Cesium application.
+// It initializes the Cesium viewer and adds the default and KBA tilesets to the scene.
+// It also adds event listeners to the checkboxes to toggle the visibility of the tilesets.
+
+// Access token for Cesium Ion
 Cesium.Ion.defaultAccessToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJkNDQ3MDgxZC02OWU2LTRiNTMtYjUyNS1hYmRiMGRjMGE2N2EiLCJpZCI6MTkxOTM0LCJpYXQiOjE3MDc5MTU1NzF9.wwiBhBlO6d9r53a5uOWZkATR5tZGFzUpbt-I1ewTP1w";
 
+// Create a new Cesium viewer
 export const viewer = new Cesium.Viewer("cesiumContainer", {
   infoBox: true,
   selectionIndicator: true,
@@ -10,27 +18,34 @@ export const viewer = new Cesium.Viewer("cesiumContainer", {
   timeline: false,
   animation: false,
 });
+// The different tiles that can be shown
 let defaultTileset, kbaTileset, nidingenTileset;
 
+// Set the maximum distance for the shadow map
 const shadowMap = viewer.shadowMap;
 shadowMap.maximumDistance = 5000.0;
 shadowMap.size = 4096;
 shadowMap.darkness = 0.6;
 
+// Set the initial state of the tilesets
 const toggleCheck = {
   defaultTileset: false,
   kbaTileset: true,
   nidingenTileset: false,
 };
 
+// Create a copy of the initial state
 const state = { ...toggleCheck };
 
+// Get the checkboxes from the DOM
 const defaultCheckbox = document.getElementById("toggleDefaultTileset");
 const kbaCheckbox = document.getElementById("toggleKBATileset");
 const nidingenCheckbox = document.getElementById("toggleNidingenTileset");
 
+// Function to apply the viewer settings and add the tilesets
 async function applyViewer() {
   try {
+    // Fly to a specific location and orientation, in this case, Kungsbacka.
     viewer.camera.flyTo({
       destination: Cesium.Cartesian3.fromDegrees(12.1082, 57.462464, 1600),
       orientation: {
@@ -39,6 +54,7 @@ async function applyViewer() {
       },
     });
 
+    // Add a listener to the home button to fly to a specific location and orientation
     viewer.homeButton.viewModel.command.beforeExecute.addEventListener(
       function (e) {
         viewer.camera.flyTo({
@@ -52,6 +68,7 @@ async function applyViewer() {
       }
     );
 
+    // Load the default and KBA tilesets from Cesium Ion
     defaultTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
     kbaTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2459461);
     // nidingenTileset = await Cesium.Cesium3DTileset.fromIonAssetId(75343);
@@ -72,10 +89,10 @@ async function applyViewer() {
         kbaExtras.ion.defaultStyle
       );
     }
-
+    // Apply the basic style to the default tileset
     applyBasicStyle(defaultTileset);
 
-    // Initially hide the default tileset (assuming it's not visible by default)
+    // Initially show the default tileset (assuming it's visible by default)
     if (defaultTileset) {
       defaultTileset.show = state.defaultTileset;
     }
@@ -83,6 +100,7 @@ async function applyViewer() {
     if (kbaTileset) {
       kbaTileset.show = state.kbaTileset;
     }
+    // Initially show the Nidingen tileset (assuming it's visible by default)
     // if (nidingenTileset) {
     //   nidingenTileset.show = state.nidingenTileset;
     // }
@@ -114,11 +132,13 @@ async function updateTilesetVisibility() {
       }
     }
 
+    // Update Nidingen tileset visibility
     // if (nidingenTileset) {
     //   nidingenTileset.show = state.nidingenTileset;
 
     //   // close the infobox when the tileset is hidden
     //   if (!state.nidingenTileset) {
+    // close the infobox when the tileset is hidden
     //     viewer.selectedEntity = undefined;
     //   }
     // }
@@ -126,7 +146,6 @@ async function updateTilesetVisibility() {
     // Update terrain provider based on which tileset is shown
     if (state.defaultTileset) {
       // Set terrainProvider for default tileset
-
       viewer.terrainProvider =
         await Cesium.CesiumTerrainProvider.fromIonAssetId(1);
     }
@@ -144,64 +163,25 @@ async function updateTilesetVisibility() {
   }
 }
 
-// function updateCheckboxState() {
-//   defaultCheckbox.disabled = state.defaultTileset && !state.kbaTileset;
-//   kbaCheckbox.disabled = state.kbaTileset && !state.defaultTileset;
-// }
-
-// defaultCheckbox.addEventListener("change", function (event) {
-//   if (event.target.checked) {
-//     // If the default checkbox is checked, uncheck the KBA checkbox
-//     kbaCheckbox.checked = false;
-//     state.defaultTileset = true;
-//     state.kbaTileset = false;
-//   } else {
-//     // If the default checkbox is unchecked, prevent it from being turned off if KBA is off
-//     if (!kbaCheckbox.checked) {
-//       event.preventDefault();
-//       return;
-//     }
-//     state.defaultTileset = false;
-//   }
-
-//   updateTilesetVisibility();
-//   updateCheckboxState();
-// });
-
-// kbaCheckbox.addEventListener("change", function (event) {
-//   if (event.target.checked) {
-//     // If the KBA checkbox is checked, uncheck the default checkbox
-//     defaultCheckbox.checked = false;
-//     state.defaultTileset = false;
-//     state.kbaTileset = true;
-//   } else {
-//     // If the KBA checkbox is unchecked, prevent it from being turned off if default is off
-//     if (!defaultCheckbox.checked) {
-//       event.preventDefault();
-//       return;
-//     }
-//     state.kbaTileset = false;
-//   }
-
-//   updateTilesetVisibility();
-//   updateCheckboxState();
-// });
-
+// an event listener to update the defaulttileset visibility when the state changes
 defaultCheckbox.addEventListener("change", function () {
   state.defaultTileset = defaultCheckbox.checked;
   updateTilesetVisibility();
 });
 
+// an event listener to update the kbatileset visibility when the state changes
 kbaCheckbox.addEventListener("change", function () {
   state.kbaTileset = kbaCheckbox.checked;
   updateTilesetVisibility();
 });
 
+// an event listener to update the nidingentileset visibility when the state changes
 // nidingenCheckbox.addEventListener("change", function () {
 //   state.nidingenTileset = nidingenCheckbox.checked;
 //   updateTilesetVisibility();
 // });
 
+// an event listener to toggle between on and off for the visibility of the layer switcher card.
 document.addEventListener("DOMContentLoaded", function () {
   const toolbar = document.querySelector("div.cesium-viewer-toolbar");
   const modeButton = document.querySelector(
@@ -211,12 +191,10 @@ document.addEventListener("DOMContentLoaded", function () {
   myButton.classList.add("cesium-button", "cesium-toolbar-button");
   myButton.setAttribute("title", "Lagerhanteraren");
 
-  // Create a <span> element for the Iconify icon
   const iconSpan = document.createElement("span");
   iconSpan.classList.add("lsNavBtn");
   iconSpan.setAttribute("data-icon", "mdi:camera");
 
-  // Append the icon to the button
   myButton.appendChild(iconSpan);
   toolbar.insertBefore(myButton, modeButton);
 
@@ -227,13 +205,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   myButton.addEventListener("click", function () {
     if (tableShown) {
-      layerSwitcherCard.style.display = "none"; // Hide the time changer
+      layerSwitcherCard.style.display = "none";
     } else {
-      layerSwitcherCard.style.display = "block"; // Show the time changer
+      layerSwitcherCard.style.display = "block";
     }
-    tableShown = !tableShown; // Toggle the visibility flag
+    tableShown = !tableShown;
   });
 });
+
+// Function to fly the camera to a specific location and orientation (Nidingen)
 window.flyCameraToNidingen = function () {
   try {
     viewer.camera.flyTo({
@@ -248,5 +228,4 @@ window.flyCameraToNidingen = function () {
   }
 };
 // Initially set checkbox state
-// updateCheckboxState();
 applyViewer();
