@@ -248,5 +248,4 @@ document
 document
   .getElementById("zoom-out-button")
   .addEventListener("click", zoomOut, false);
-// Initially set checkbox state
 applyViewer();
