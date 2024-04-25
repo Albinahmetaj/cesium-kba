@@ -235,5 +235,18 @@ window.flyCameraToNidingen = function () {
     console.log(error);
   }
 };
+
+function zoomIn() {
+  viewer.camera.zoomIn(viewer.camera.positionCartographic.height / 2.0);
+}
+function zoomOut() {
+  viewer.camera.zoomOut(viewer.camera.positionCartographic.height * 0.5);
+}
+document
+  .getElementById("zoom-in-button")
+  .addEventListener("click", zoomIn, false);
+document
+  .getElementById("zoom-out-button")
+  .addEventListener("click", zoomOut, false);
 // Initially set checkbox state
 applyViewer();

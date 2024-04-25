@@ -299,3 +299,39 @@ h3 {
 .cesium-widget-credits {
   display: none !important;
 }
+
+.zoom-panel {
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+#zoom-in-button {
+  display: inline-block;
+  width: 2.3em;
+  height: 2.3em;
+  color: white;
+  background-size: 100% 100%;
+  background-color: #303336;
+  border: 4px solid #303336;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#zoom-out-button {
+  display: inline-block;
+  width: 2.3em;
+  height: 2.3em;
+  color: white;
+  background-size: 100% 100%;
+  background-color: #303336;
+  border: 4px solid #303336;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#zoom-in-plus {
+  font-size: 1.5em;
+}
+#zoom-out-minus {
+  font-size: 1.5em;
+}
