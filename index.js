@@ -21,7 +21,11 @@ export const viewer = new Cesium.Viewer("cesiumContainer", {
   navigationHelpButton: false,
 });
 // The different tiles that can be shown
-let defaultTileset, kbaTileset, nidingenTileset;
+let defaultTileset,
+  kbaTileset,
+  nidingenTileset,
+  bolshedenTileSet,
+  hospitalTileSet;
 // Set the maximum distance for the shadow map
 const shadowMap = viewer.shadowMap;
 shadowMap.maximumDistance = 5000.0;
@@ -33,15 +37,24 @@ const toggleCheck = {
   defaultTileset: false,
   kbaTileset: true,
   nidingenTileset: false,
+  bolshedenTileSet: false,
+  hospitalTileSet: false,
 };
 
 // Create a copy of the initial state
 const state = { ...toggleCheck };
 
+let defaultTerrainProvider = null;
+let kbaTerrainProvider = null;
+let bolshedenTerrainProvider = null;
+let hospitalTerrainProvider = null;
+
 // Get the checkboxes from the DOM
 const defaultCheckbox = document.getElementById("toggleDefaultTileset");
 const kbaCheckbox = document.getElementById("toggleKBATileset");
 const nidingenCheckbox = document.getElementById("toggleNidingenTileset");
+const bolshedenCheckbox = document.getElementById("toggleBolshedenTileset");
+const hospitalCheckbox = document.getElementById("toggleHospitalTileset");
 
 // Function to apply the viewer settings and add the tilesets
 async function applyViewer() {
@@ -73,11 +86,15 @@ async function applyViewer() {
     defaultTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
     kbaTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2459461);
     // nidingenTileset = await Cesium.Cesium3DTileset.fromIonAssetId(75343);
+    bolshedenTileSet = await Cesium.Cesium3DTileset.fromIonAssetId(2563001);
+    hospitalTileSet = await Cesium.Cesium3DTileset.fromIonAssetId(2563140);
 
     // Add the default and KBA tilesets to the viewer's scene
     viewer.scene.primitives.add(defaultTileset);
     viewer.scene.primitives.add(kbaTileset);
     // viewer.scene.primitives.add(nidingenTileset);
+    viewer.scene.primitives.add(bolshedenTileSet);
+    viewer.scene.primitives.add(hospitalTileSet);
 
     // Apply the default style if it exists
     const kbaExtras = kbaTileset.asset.extras;
@@ -105,6 +122,12 @@ async function applyViewer() {
     // if (nidingenTileset) {
     //   nidingenTileset.show = state.nidingenTileset;
     // }
+    if (bolshedenTileSet) {
+      bolshedenTileSet.show = state.bolshedenTileSet;
+    }
+    if (hospitalTileSet) {
+      hospitalTileSet.show = state.hospitalTileSet;
+    }
   } catch (error) {
     console.log(error);
   }
@@ -126,7 +149,6 @@ async function updateTilesetVisibility() {
     // Update KBA tileset visibility
     if (kbaTileset) {
       kbaTileset.show = state.kbaTileset;
-
       // close the infobox when the tileset is hidden
       if (!state.kbaTileset) {
         viewer.selectedEntity = undefined;
@@ -144,43 +166,84 @@ async function updateTilesetVisibility() {
     //   }
     // }
 
-    // Update terrain provider based on which tileset is shown
+    // Update KBA tileset visibility
+    if (bolshedenTileSet) {
+      bolshedenTileSet.show = state.bolshedenTileSet;
+      // close the infobox when the tileset is hidden
+      if (!state.bolshedenTileSet) {
+        viewer.selectedEntity = undefined;
+      }
+    }
+
+    // Update Hospital tileset visibility
+    if (hospitalTileSet) {
+      hospitalTileSet.show = state.hospitalTileSet;
+      // close the infobox when the tileset is hidden
+      if (!state.hospitalTileSet) {
+        viewer.selectedEntity = undefined;
+      }
+    }
+
     if (state.defaultTileset) {
-      // Set terrainProvider for default tileset
-      viewer.terrainProvider =
-        await Cesium.CesiumTerrainProvider.fromIonAssetId(1);
+      // Set terrainProvider for default tileset if not already set
+      if (!defaultTerrainProvider) {
+        defaultTerrainProvider =
+          await Cesium.CesiumTerrainProvider.fromIonAssetId(1);
+      }
+      viewer.terrainProvider = defaultTerrainProvider;
     }
     if (state.kbaTileset) {
-      // Set terrainProvider for KBA tileset
-      viewer.terrainProvider = new Cesium.EllipsoidTerrainProvider();
+      // Set terrainProvider for KBA tileset if not already set
+      if (!kbaTerrainProvider) {
+        kbaTerrainProvider = new Cesium.EllipsoidTerrainProvider();
+      }
+      viewer.terrainProvider = kbaTerrainProvider;
     }
-    // if (state.nidingenTileset) {
-    //   // Set terrainProvider for Nidingen tileset
-    //   viewer.terrainProvider = new Cesium.EllipsoidTerrainProvider();
-    // }
+    if (state.bolshedenTileSet) {
+      // Set terrainProvider for Bolsheden tileset if not already set
+      if (!bolshedenTerrainProvider) {
+        bolshedenTerrainProvider =
+          await Cesium.CesiumTerrainProvider.fromIonAssetId(2563037);
+      }
+      viewer.terrainProvider = bolshedenTerrainProvider;
+    }
+    if (state.hospitalTileSet) {
+      // Set terrainProvider for Hospital tileset if not already set
+      if (!hospitalTerrainProvider) {
+        hospitalTerrainProvider =
+          await Cesium.CesiumTerrainProvider.fromIonAssetId(2563139);
+      }
+      viewer.terrainProvider = hospitalTerrainProvider;
+    }
+    // Dispatch event indicating state change
     document.dispatchEvent(new CustomEvent("stateChanged", { detail: state }));
   } catch (error) {
     console.log(error);
   }
 }
 
-// an event listener to update the defaulttileset visibility when the state changes
-defaultCheckbox.addEventListener("change", function () {
-  state.defaultTileset = defaultCheckbox.checked;
-  updateTilesetVisibility();
-});
+updateTilesetVisibility().then(() => {
+  // Attach event listeners after initial terrain setup
+  defaultCheckbox.addEventListener("change", function () {
+    state.defaultTileset = defaultCheckbox.checked;
+    updateTilesetVisibility();
+  });
 
-// an event listener to update the kbatileset visibility when the state changes
-kbaCheckbox.addEventListener("change", function () {
-  state.kbaTileset = kbaCheckbox.checked;
-  updateTilesetVisibility();
-});
+  kbaCheckbox.addEventListener("change", function () {
+    state.kbaTileset = kbaCheckbox.checked;
+    updateTilesetVisibility();
+  });
 
-// an event listener to update the nidingentileset visibility when the state changes
-// nidingenCheckbox.addEventListener("change", function () {
-//   state.nidingenTileset = nidingenCheckbox.checked;
-//   updateTilesetVisibility();
-// });
+  bolshedenCheckbox.addEventListener("change", function () {
+    state.bolshedenTileSet = bolshedenCheckbox.checked;
+    updateTilesetVisibility();
+  });
+
+  hospitalCheckbox.addEventListener("change", function () {
+    state.hospitalTileSet = hospitalCheckbox.checked;
+    updateTilesetVisibility();
+  });
+});
 
 // an event listener to toggle between on and off for the visibility of the layer switcher card.
 const toolbar = document.querySelector("div.cesium-viewer-toolbar");
@@ -226,6 +289,34 @@ window.flyCameraToNidingen = function () {
   try {
     viewer.camera.flyTo({
       destination: Cesium.Cartesian3.fromDegrees(11.913, 57.295, 700),
+      orientation: {
+        heading: Cesium.Math.toRadians(-30),
+        pitch: Cesium.Math.toRadians(-30),
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+window.flyCameraToBolsheden = function () {
+  try {
+    viewer.camera.flyTo({
+      destination: Cesium.Cartesian3.fromDegrees(11.968, 57.553, 700),
+      orientation: {
+        heading: Cesium.Math.toRadians(-30),
+        pitch: Cesium.Math.toRadians(-30),
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+window.flyCameraToHospital = function () {
+  try {
+    viewer.camera.flyTo({
+      destination: Cesium.Cartesian3.fromDegrees(12.092, 57.488, 500),
       orientation: {
         heading: Cesium.Math.toRadians(-30),
         pitch: Cesium.Math.toRadians(-30),

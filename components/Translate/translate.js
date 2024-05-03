@@ -41,6 +41,10 @@ function updateContent() {
       i18next.t("timeChangerHour");
     document.getElementById("nidingen-content").innerText =
       i18next.t("lsNidingenContent");
+    document.getElementById("bolsheden-content").innerText =
+      i18next.t("lsBolShedenContent");
+    document.getElementById("hospital-content").innerText =
+      i18next.t("lsHospitalContent");
   } catch (error) {
     console.log(error);
   }

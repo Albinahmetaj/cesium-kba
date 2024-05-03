@@ -26,24 +26,28 @@ const clickHandler = viewer.screenSpaceEventHandler.getInputAction(
 );
 
 function updateNameOverlay(pickedFeature, position) {
-  if (!Cesium.defined(pickedFeature)) {
-    nameOverlay.style.display = "none";
-    return;
-  }
+  try {
+    if (!Cesium.defined(pickedFeature)) {
+      nameOverlay.style.display = "none";
+      return;
+    }
 
-  // A feature was picked, so show its overlay content
-  nameOverlay.style.display = "block";
-  nameOverlay.style.bottom = `${viewer.canvas.clientHeight - position.y}px`;
-  nameOverlay.style.left = `${position.x}px`;
+    // A feature was picked, so show its overlay content
+    nameOverlay.style.display = "block";
+    nameOverlay.style.bottom = `${viewer.canvas.clientHeight - position.y}px`;
+    nameOverlay.style.left = `${position.x}px`;
 
-  const name = pickedFeature.getProperty("name");
-  nameOverlay.textContent = name;
+    const name = pickedFeature?.getProperty("name");
+    nameOverlay.textContent = name;
 
-  // Check if name is undefined or null, and set backgroundColor accordingly
-  if (name === undefined || name === null) {
-    nameOverlay.style.backgroundColor = ""; // Empty string to reset to default
-  } else {
-    nameOverlay.style.backgroundColor = "black";
+    // Check if name is undefined or null, and set backgroundColor accordingly
+    if (name === undefined || name === null) {
+      nameOverlay.style.backgroundColor = ""; // Empty string to reset to default
+    } else {
+      nameOverlay.style.backgroundColor = "black";
+    }
+  } catch (error) {
+    console.log("error", error);
   }
 }
 
@@ -71,14 +75,18 @@ function createPickedFeatureDescription(pickedFeature) {
   const translateDisplayName = (displayNameKey) => i18next.t(displayNameKey);
 
   const rows = properties.map((property) => {
-    const value = pickedFeature.getProperty(property.name);
-    if (value !== undefined && value !== null) {
-      const translatedDisplayName = translateDisplayName(
-        property.displayNameKey
-      );
-      return `<tr><th>${translatedDisplayName}</th><td>${value}</td></tr>`;
+    try {
+      const value = pickedFeature?.getProperty(property?.name);
+      if (value !== undefined && value !== null) {
+        const translatedDisplayName = translateDisplayName(
+          property.displayNameKey
+        );
+        return `<tr><th>${translatedDisplayName}</th><td>${value}</td></tr>`;
+      }
+      return ""; // Return an empty string for undefined values
+    } catch (error) {
+      console.log("error", error);
     }
-    return ""; // Return an empty string for undefined values
   });
 
   const description = `
