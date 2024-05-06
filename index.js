@@ -84,7 +84,7 @@ async function applyViewer() {
 
     // Load the default and KBA tilesets from Cesium Ion
     defaultTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
-    kbaTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2459461);
+    kbaTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2564547);
     // nidingenTileset = await Cesium.Cesium3DTileset.fromIonAssetId(75343);
     bolshedenTileSet = await Cesium.Cesium3DTileset.fromIonAssetId(2563001);
     hospitalTileSet = await Cesium.Cesium3DTileset.fromIonAssetId(2563140);
@@ -195,7 +195,9 @@ async function updateTilesetVisibility() {
     if (state.kbaTileset) {
       // Set terrainProvider for KBA tileset if not already set
       if (!kbaTerrainProvider) {
-        kbaTerrainProvider = new Cesium.EllipsoidTerrainProvider();
+        kbaTerrainProvider = await Cesium.CesiumTerrainProvider.fromIonAssetId(
+          2564535
+        );
       }
       viewer.terrainProvider = kbaTerrainProvider;
     }
