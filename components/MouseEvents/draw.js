@@ -6,6 +6,8 @@ viewer.screenSpaceEventHandler.removeInputAction(
   Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK
 );
 function createPoint(worldPosition) {
+  viewer.selectedEntity = undefined;
+
   const point = viewer.entities.add({
     position: worldPosition,
     point: {
