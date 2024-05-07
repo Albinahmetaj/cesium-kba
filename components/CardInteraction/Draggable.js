@@ -5,9 +5,7 @@ const positionTimeChanger = { x: 0, y: 0 };
 const positionInfo = { x: 0, y: 0 };
 
 interact("#draggableLayerSwitcherCard").draggable({
-  // enable inertial throwing
   inertia: true,
-  // keep the element within the area of it's parent
   modifiers: [
     interact.modifiers.restrictRect({
       restriction: "parent",
@@ -15,15 +13,14 @@ interact("#draggableLayerSwitcherCard").draggable({
     }),
   ],
   ignoreFrom: ".ignoreCameraDrag",
-  // enable autoScroll
   autoScroll: true,
   listeners: {
-    move: dragMoveListener,
     move(event) {
+      const target = event.target;
       positionLS.x += event.dx;
       positionLS.y += event.dy;
 
-      event.target.style.transform = `translate(${positionLS.x}px, ${positionLS.y}px)`;
+      target.style.transform = `translate(${positionLS.x}px, ${positionLS.y}px)`;
     },
   },
 });

@@ -30,6 +30,7 @@
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-xhr-backend/3.2.2/i18nextXHRBackend.min.js" integrity="sha512-MUYO1+VEcFMYb/UEtAGdOArYvDh/yth3ZQwfmdttD9CURHAMzkfCZPRYIbXNCbOQWSjOXjjj5xwjEk/gEMXCdg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
   </head>
   <body>
 
@@ -54,6 +55,15 @@
         </button>
       </div>
     </div>
+    
+    <div class="toolbar">
+      <button disabled id="toggleInfoBoxButton" class="infoClickButton"></button>
+      <div>
+        <button id="toggleDrawButton" class="drawButton"></button>
+
+      </div>
+    </div>
+    
 
     <div id="cesiumContainer">
       <img src="./assets/Logo.png" class="kbaLogo" />
@@ -67,18 +77,18 @@
       <div class="layer-switcher">
           <label style="width: fit-content;">
             <input type="checkbox" id="toggleDefaultTileset" class="check">
-            <span id="default-content"></span>
+            <span class="ls-content-titles" id="default-content"></span>
           </input>
           </label>
          <label style="width: fit-content;">
             <input type="checkbox" id="toggleKBATileset" class="check" checked>
-            <span id="kba-content"></span>
+            <span class="ls-content-titles" id="kba-content"></span>
           </input>
           </label>
           <div class="toggle-nidingen-row">
             <label style="width: fit-content;">
               <input type="checkbox" id="toggleNidingenTileset" class="check">
-              <span id="nidingen-content"></span>
+              <span class="ls-content-titles" id="nidingen-content"></span>
             </input>
              </label>
              <hr />
@@ -92,7 +102,7 @@
       <div class="toggle-nidingen-row">
       <label style="width: fit-content;">
         <input type="checkbox" id="toggleBolshedenTileset" class="check">
-        <span id="bolsheden-content"></span>
+        <span class="ls-content-titles" id="bolsheden-content"></span>
       </input>
       </label>
       <hr />
@@ -106,7 +116,7 @@
         <div class="toggle-nidingen-row">
           <label style="width: fit-content;">
             <input type="checkbox" id="toggleHospitalTileset" class="check">
-            <span id="hospital-content"></span>
+            <span class="ls-content-titles" id="hospital-content"></span>
           </input>
           </label>
           <hr />
@@ -147,8 +157,10 @@
       <script type="module" src="./components/CardInteraction/Resizeable.js"></script>
       <script type="module" src="./components/CardInteraction/Draggable.js"></script>
       <script type="module" src="./components/MouseEvents/tileHighlightPicker.js"></script>
+      <script type="module" src="./components/MouseEvents/draw.js"></script>
       <script type="module" src="./components/style/navStyle.js"></script>
       <script type="module" src="./components/Timechanger/timeChanger.js"></script>
+      <script type="module" src="./components/Toolbar/tools.js"></script>
       
   </body>
 </html>

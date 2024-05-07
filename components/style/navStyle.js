@@ -13,6 +13,7 @@ homeButton.title = "Återställ vy till startposition";
 
 // Get the search bar element
 const searchBar = document.querySelector(".cesium-geocoder-input");
+searchBar.style.backgroundColor = "white";
 searchBar.placeholder = "Ange en adress eller ett landmärke...";
 
 // Function to update the buildings information body with the building colors

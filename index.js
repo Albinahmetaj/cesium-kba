@@ -12,7 +12,7 @@ Cesium.Ion.defaultAccessToken =
 // Create a new Cesium viewer
 export const viewer = new Cesium.Viewer("cesiumContainer", {
   infoBox: true,
-  selectionIndicator: true,
+  selectionIndicator: false,
   shadows: true,
   terrainShadows: Cesium.ShadowMode.ENABLED,
   timeline: false,
@@ -20,6 +20,7 @@ export const viewer = new Cesium.Viewer("cesiumContainer", {
   baseLayerPicker: false,
   navigationHelpButton: false,
 });
+
 // The different tiles that can be shown
 let defaultTileset,
   kbaTileset,
@@ -341,4 +342,5 @@ document
 document
   .getElementById("zoom-out-button")
   .addEventListener("click", zoomOut, false);
+
 applyViewer();

@@ -63,6 +63,7 @@ h3 {
   mask-repeat: no-repeat;
   -webkit-mask-size: 100% 100%;
   mask-size: 100% 100%;
+  color: black;
 }
 
 .emojione--flag-for-sweden {
@@ -73,8 +74,8 @@ h3 {
   cursor: pointer;
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  border: 4px solid #303336;
-  background-color: #303336;
+  border: 3px solid #5b5d5e;
+  background-color: #5b5d5e;
   border-radius: 5px;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%23428bc1' d='M61.2 25C58 11.8 46.2 2 32 2h-1v23zM17 6C10 10.1 4.8 16.9 2.8 25H17zM2.8 39c2 8.1 7.2 14.9 14.2 19V39zM31 62h1c14.2 0 26-9.8 29.2-23H31z'/%3E%3Cpath fill='%23ffe62e' d='M61.2 25H31V2c-5.1.2-9.9 1.6-14 4v19H2.8c-.5 2.2-.8 4.6-.8 7c0 2.4.3 4.8.8 7H17v19c4.1 2.4 8.9 3.8 14 4V39h30.2c.5-2.2.8-4.6.8-7c0-2.4-.3-4.8-.8-7'/%3E%3C/svg%3E");
 }
@@ -85,15 +86,15 @@ h3 {
   cursor: pointer;
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  background-color: #303336;
-  border: 4px solid #303336;
+  background-color: #5b5d5e;
+  border: 3px solid #5b5d5e;
   border-radius: 5px;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%232a5f9e' d='M22 60.3V46.5l-10.3 7.6c2.9 2.7 6.4 4.8 10.3 6.2m20 0c3.9-1.4 7.4-3.5 10.3-6.2L42 46.4zM3.7 42c.3 1 .7 1.9 1.2 2.9L8.8 42zm51.5 0l3.9 2.9c.4-.9.8-1.9 1.2-2.9z'/%3E%3Cpath fill='%23fff' d='M23.5 38H2.6c.3 1.4.7 2.7 1.1 4h5.1l-3.9 2.9c.8 1.7 1.7 3.2 2.8 4.7L18 42h4v2l-11.7 8.6l1.4 1.4L22 46.5v13.8c1.3.5 2.6.8 4 1.1V38zm37.9 0H38v23.4c1.4-.3 2.7-.7 4-1.1V46.5L52.3 54c1.4-1.3 2.6-2.7 3.8-4.2L45.4 42h6.8l6.1 4.5c.3-.5.6-1.1.8-1.6L55.2 42h5.1c.4-1.3.8-2.6 1.1-4'/%3E%3Cpath fill='%23ed4c5c' d='M7.7 49.6c.8 1.1 1.6 2.1 2.5 3.1L22 44.1v-2h-4zM45.5 42l10.7 7.8c.4-.5.7-1 1.1-1.5c.1-.1.1-.2.2-.2c.3-.5.7-1.1 1-1.6L52.2 42z'/%3E%3Cpath fill='%232a5f9e' d='M42 3.7v13.8l10.3-7.6C49.4 7.2 45.9 5.1 42 3.7m-20 0c-3.9 1.4-7.4 3.5-10.3 6.2L22 17.6zM60.3 22c-.3-1-.7-1.9-1.2-2.9L55.2 22zM8.8 22l-3.9-2.9c-.4 1-.8 1.9-1.2 2.9z'/%3E%3Cpath fill='%23fff' d='M40.5 26h20.8c-.3-1.4-.7-2.7-1.1-4h-5.1l3.9-2.9c-.8-1.7-1.7-3.2-2.8-4.7L46 22h-4v-2l11.7-8.6l-1.4-1.4L42 17.5V3.7c-1.3-.5-2.6-.8-4-1.1V26zM2.6 26H26V2.6c-1.4.3-2.7.7-4 1.1v13.8L11.7 10c-1.4 1.3-2.6 2.7-3.8 4.2L18.6 22h-6.8l-6.1-4.5c-.3.5-.6 1.1-.8 1.6L8.8 22H3.7c-.4 1.3-.8 2.6-1.1 4'/%3E%3Cg fill='%23ed4c5c'%3E%3Cpath d='M56.3 14.4c-.8-1.1-1.6-2.1-2.5-3.1L42 19.9v2h4zM18.5 22L7.9 14.2c-.4.5-.7 1-1.1 1.5c-.1.1-.1.2-.2.2c-.3.5-.7 1.1-1 1.6l6.1 4.5z'/%3E%3Cpath d='M61.4 26H38V2.6c-1.9-.4-3.9-.6-6-.6s-4.1.2-6 .6V26H2.6c-.4 1.9-.6 3.9-.6 6s.2 4.1.6 6H26v23.4c1.9.4 3.9.6 6 .6s4.1-.2 6-.6V38h23.4c.4-1.9.6-3.9.6-6s-.2-4.1-.6-6'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 .emojione--flag-for-sweden.selected,
 .emojione--flag-for-united-kingdom.selected {
-  border-color: #17a42a; /* Change the border color for the selected flag */
+  border-color: #17a42a;
 }
 
 .country-flags {
@@ -104,8 +105,10 @@ h3 {
 }
 
 .cesium-infoBox {
-  top: 10%;
+  top: 11%;
+  right: 0.5rem;
 }
+
 .check {
   appearance: none;
   -webkit-appearance: none;
@@ -160,6 +163,7 @@ h3 {
   mask-repeat: no-repeat;
   -webkit-mask-size: 100% 100%;
   mask-size: 100% 100%;
+  color: black;
 }
 
 #infoTable {
@@ -217,6 +221,7 @@ h3 {
   mask-repeat: no-repeat;
   -webkit-mask-size: 100% 100%;
   mask-size: 100% 100%;
+  color: black;
 }
 
 #summerButton {
@@ -301,7 +306,7 @@ h3 {
 }
 
 .zoom-panel {
-  margin-top: 5px;
+  margin-top: 12px;
   display: flex;
   justify-content: center;
   gap: 12px;
@@ -310,10 +315,9 @@ h3 {
   display: inline-block;
   width: 2.3em;
   height: 2.3em;
-  color: white;
   background-size: 100% 100%;
-  background-color: #303336;
-  border: 4px solid #303336;
+  background-color: #ffffff;
+  border: 1.5px solid #000000;
   border-radius: 5px;
   cursor: pointer;
 }
@@ -322,16 +326,78 @@ h3 {
   display: inline-block;
   width: 2.3em;
   height: 2.3em;
-  color: white;
   background-size: 100% 100%;
-  background-color: #303336;
-  border: 4px solid #303336;
+  background-color: #ffffff;
+  border: 1.5px solid #000000;
   border-radius: 5px;
   cursor: pointer;
 }
 #zoom-in-plus {
   font-size: 1.5em;
+  color: black;
 }
 #zoom-out-minus {
   font-size: 1.5em;
+  color: black;
+}
+
+.cesium-toolbar-button {
+  color: black;
+  background-color: white;
+}
+
+.cesium-svgPath-svg path {
+  fill: black;
+}
+
+.cesium-geocoder-searchButton {
+  background-color: #fafafa;
+  border-radius: 10px;
+}
+
+.ls-content-titles {
+  font-size: smaller;
+}
+
+.toolbar {
+  position: absolute;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  bottom: 40%;
+  right: 5px;
+}
+
+.drawButton {
+  display: inline-block;
+  width: 2.2em;
+  height: 2.2em;
+  background-size: 100% 100%;
+  background-color: #ffffff;
+  border: 2px solid #0a0a0a;
+  border-radius: 5px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M9.75 20.85c1.78-.7 1.39-2.63.49-3.85c-.89-1.25-2.12-2.11-3.36-2.94A9.8 9.8 0 0 1 4.54 12c-.28-.33-.85-.94-.27-1.06c.59-.12 1.61.46 2.13.68c.91.38 1.81.82 2.65 1.34l1.01-1.7C8.5 10.23 6.5 9.32 4.64 9.05c-1.06-.16-2.18.06-2.54 1.21c-.32.99.19 1.99.77 2.77c1.37 1.83 3.5 2.71 5.09 4.29c.34.33.75.72.95 1.18c.21.44.16.47-.31.47c-1.24 0-2.79-.97-3.8-1.61l-1.01 1.7c1.53.94 4.09 2.41 5.96 1.79m11.09-15.6c.22-.22.22-.58 0-.79l-1.3-1.3a.56.56 0 0 0-.78 0l-1.02 1.02l2.08 2.08M11 10.92V13h2.08l6.15-6.15l-2.08-2.08z'/%3E%3C/svg%3E");
+}
+
+.infoClickButton {
+  display: inline-block;
+  width: 2.2em;
+  height: 2.2em;
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-size: 100% 100%;
+  background-color: #ffffff;
+  border: 2px solid #0a0a0a;
+  border-radius: 5px;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cg fill='none' stroke='black' stroke-linecap='round' stroke-linejoin='round' stroke-width='4'%3E%3Cpath d='M24 4v8'/%3E%3Cpath fill='black' fill-rule='evenodd' d='m22 22l20 4l-6 4l6 6l-6 6l-6-6l-4 6z' clip-rule='evenodd'/%3E%3Cpath d='m38.142 9.858l-5.657 5.657M9.858 38.142l5.657-5.657M4 24h8M9.858 9.858l5.657 5.657'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.cesium-infoBox-iframe {
+  max-height: 330px !important;
 }
