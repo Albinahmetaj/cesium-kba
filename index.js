@@ -9,7 +9,6 @@ import { applyBasicStyle } from "./components/style/buildingStyle.js";
 Cesium.Ion.defaultAccessToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJkNDQ3MDgxZC02OWU2LTRiNTMtYjUyNS1hYmRiMGRjMGE2N2EiLCJpZCI6MTkxOTM0LCJpYXQiOjE3MDc5MTU1NzF9.wwiBhBlO6d9r53a5uOWZkATR5tZGFzUpbt-I1ewTP1w";
 
-// Create a new Cesium viewer
 export const viewer = new Cesium.Viewer("cesiumContainer", {
   infoBox: true,
   selectionIndicator: false,
@@ -17,9 +16,42 @@ export const viewer = new Cesium.Viewer("cesiumContainer", {
   terrainShadows: Cesium.ShadowMode.ENABLED,
   timeline: false,
   animation: false,
-  baseLayerPicker: false,
   navigationHelpButton: false,
+  baseLayerPicker: false,
+  // imageryProvider: false,
 });
+// const url = "https://ows.terrestris.de/osm/service?";
+// const imageryProvider = new Cesium.WebMapServiceImageryProvider({
+//   url: url,
+//   parameters: {
+//     format: "image/png",
+//     transparent: "true",
+//   },
+//   layers: "OSM-WMS",
+// });
+
+//Define your own imagery provider
+// const url = "https://karta.kungsbacka.se/geoserver/wms";
+// const imageryProvider = new Cesium.WebMapServiceImageryProvider({
+//   url: url,
+//   parameters: {
+//     format: "image/png",
+//     transparent: "true",
+//   },
+//   layers: "kba:topowebbkartan_nedtonad",
+// });
+
+// const url = "https://karta.kungsbacka.se/geoserver/wms";
+// const imageryProvider = new Cesium.WebMapServiceImageryProvider({
+//   url: url,
+//   parameters: {
+//     format: "image/png",
+//     transparent: "true",
+//   },
+//   layers: "kba:flygfoto_kba_2023_8cm_geotiff",
+// });
+
+// viewer.imageryLayers.addImageryProvider(imageryProvider);
 
 // The different tiles that can be shown
 let defaultTileset,

@@ -1,6 +1,6 @@
 {
   "lsTitle": "Layerswitcher",
-  "lsDefaultContent": "OpenStreetMap 3D buildings & terrain",
+  "lsDefaultContent": "OpenStreetMaps 3D buildings & terrain",
   "lsKbaContent": "Kungsbacka 3D buildings & terrain",
   "lsNidingenContent": "Nidingen 3D-buildings & terrain",
   "lsBolShedenContent": "Bolsheden 3D-buildings & terrain",
@@ -45,5 +45,9 @@
   "searchBarPlaceholder": "Enter an address or landmark...",
   "timeChangerTooltipTitle": "Solstice",
   "lsTooltipTitle": "Layerswitcher",
-  "buildingInfoToolTipTitle": "Building information"
+  "buildingInfoToolTipTitle": "Building information",
+  "lsToolTipZoomInText": "Zoom in",
+  "lsToolTipZoomOutText": "Zoom  out",
+  "lsToolTipInfoClickHighlightText": "Click to highlight building (disabled)",
+  "lsToolTipDrawText": "Draw"
 }

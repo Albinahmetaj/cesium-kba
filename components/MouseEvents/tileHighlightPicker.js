@@ -39,14 +39,16 @@ function updateNameOverlay(pickedFeature, position) {
     nameOverlay.style.bottom = `${viewer.canvas.clientHeight - position.y}px`;
     nameOverlay.style.left = `${position.x}px`;
 
-    const name = pickedFeature?.getProperty("name");
-    nameOverlay.textContent = name;
+    if (typeof pickedFeature?.getProperty === "function") {
+      const name = pickedFeature?.getProperty("name");
+      nameOverlay.textContent = name;
 
-    // Check if name is undefined or null, and set backgroundColor accordingly
-    if (name === undefined || name === null) {
-      nameOverlay.style.backgroundColor = ""; // Empty string to reset to default
-    } else {
-      nameOverlay.style.backgroundColor = "black";
+      // Check if name is undefined or null, and set backgroundColor accordingly
+      if (name === undefined || name === null) {
+        nameOverlay.style.backgroundColor = ""; // Empty string to reset to default
+      } else {
+        nameOverlay.style.backgroundColor = "black";
+      }
     }
   } catch (error) {
     console.log("error", error);
@@ -78,14 +80,17 @@ function createPickedFeatureDescription(pickedFeature) {
 
   const rows = properties.map((property) => {
     try {
-      const value = pickedFeature?.getProperty(property?.name);
-      if (value !== undefined && value !== null) {
-        const translatedDisplayName = translateDisplayName(
-          property.displayNameKey
-        );
-        return `<tr><th>${translatedDisplayName}</th><td>${value}</td></tr>`;
+      if (typeof pickedFeature?.getProperty === "function") {
+        const value = pickedFeature?.getProperty(property?.name);
+
+        if (value !== undefined && value !== null) {
+          const translatedDisplayName = translateDisplayName(
+            property.displayNameKey
+          );
+          return `<tr><th>${translatedDisplayName}</th><td>${value}</td></tr>`;
+        }
+        return ""; // Return an empty string for undefined values
       }
-      return ""; // Return an empty string for undefined values
     } catch (error) {
       console.log("error", error);
     }

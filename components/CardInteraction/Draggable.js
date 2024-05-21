@@ -1,4 +1,4 @@
-// Code for making a card draggable through the use of interact.js library.
+// Component for making a card draggable through the use of interact.js library.
 
 const positionLS = { x: 0, y: 0 };
 const positionTimeChanger = { x: 0, y: 0 };

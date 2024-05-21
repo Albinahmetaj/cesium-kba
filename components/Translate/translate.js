@@ -45,6 +45,16 @@ function updateContent() {
       i18next.t("lsBolShedenContent");
     document.getElementById("hospital-content").innerText =
       i18next.t("lsHospitalContent");
+    document.getElementById("tooltipZoomInText").innerText = i18next.t(
+      "lsToolTipZoomInText"
+    );
+    document.getElementById("tooltipZoomOutText").innerText = i18next.t(
+      "lsToolTipZoomOutText"
+    );
+    document.getElementById("tooltipInfoClickHighlightText").innerText =
+      i18next.t("lsToolTipInfoClickHighlightText");
+    document.getElementById("tooltipDrawText").innerText =
+      i18next.t("lsToolTipDrawText");
   } catch (error) {
     console.log(error);
   }

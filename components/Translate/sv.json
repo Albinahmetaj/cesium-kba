@@ -1,9 +1,9 @@
 {
   "lsTitle": "Lagerhanteraren",
-  "lsDefaultContent": "OpenStreetMap 3D-byggnader & terräng",
-  "lsKbaContent": "Kungsbacka 3D-byggnader & terräng",
-  "lsNidingenContent": "Nidingen 3D-byggnader & terräng",
-  "lsBolShedenContent": "Bolsheden 3D-byggnader & terräng",
+  "lsDefaultContent": "OpenStreetMaps 3D-byggnader & terräng",
+  "lsKbaContent": "Kungsbackas 3D-byggnader & terräng",
+  "lsNidingenContent": "Nidingens 3D-byggnader & terräng",
+  "lsBolShedenContent": "Bolshedens 3D-byggnader & terräng",
   "lsHospitalContent": "Sjukhusets 3D-byggnader & terräng",
   "timeChangerTitle": "Välj solstudie vinter- eller sommartid",
   "timeChangerMonth": "Månad",
@@ -45,5 +45,9 @@
   "searchBarPlaceholder": "Ange en adress eller ett landmärke...",
   "timeChangerTooltipTitle": "Solstudie",
   "lsTooltipTitle": "Lagerhanteraren",
-  "buildingInfoToolTipTitle": "Byggnadsinformation"
+  "buildingInfoToolTipTitle": "Byggnadsinformation",
+  "lsToolTipZoomInText": "Zooma in",
+  "lsToolTipZoomOutText": "Zooma ut",
+  "lsToolTipInfoClickHighlightText": "Klicka för att markera byggnad (Inaktiverad)",
+  "lsToolTipDrawText": "Rita"
 }

@@ -7,6 +7,9 @@
   - The draggable time changer card
   - The links to the CSS and JS files
   - The logo of the application
+  - The toolbar with the buttons for the info box and the draw tool
+  - The zoom panel with the buttons for zooming in and out
+  - The buttons for changing the time of the application
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -16,12 +19,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link
-      href="https://cesium.com/downloads/cesiumjs/releases/1.114/Build/Cesium/Widgets/widgets.css"
-      rel="stylesheet"
-    />
+    <link href="https://cesium.com/downloads/cesiumjs/releases/1.117/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
     <link href="./index.css" rel="stylesheet" />
-    <script src="https://cesium.com/downloads/cesiumjs/releases/1.114/Build/Cesium/Cesium.js"></script>
+    <script src="https://cesium.com/downloads/cesiumjs/releases/1.117/Build/Cesium/Cesium.js"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/i18next/23.9.0/i18next.min.js"
       integrity="sha512-2KRrfza4PJZX3WAcWBaOo6S3u7uOrnESelNwYwkYUgeLskpL1EYZvpo9uTfLphaUScNXrWasCK0J8gcYrVwGXA=="
@@ -47,20 +47,29 @@
       >
       </div>
       <div class="zoom-panel">
+        <div class="tooltip">
         <button id="zoom-in-button">
           <span id="zoom-in-plus">+</span>
         </button>
+        <div class="tooltiptext" id="tooltipZoomInText"></div>
+      </div>
+      <div class="tooltip">
         <button id="zoom-out-button">
           <span id="zoom-out-minus">-</span>
         </button>
+        <div class="tooltiptext" id="tooltipZoomOutText"></div>
+      </div>  
       </div>
     </div>
     
-    <div class="toolbar">
-      <button disabled id="toggleInfoBoxButton" class="infoClickButton"></button>
-      <div>
+    <div class="toolbar" id="toolbar">
+      <div class="tooltip">
+        <button disabled id="toggleInfoBoxButton" class="infoClickButton"></button>
+        <div class="tooltiptext" id="tooltipInfoClickHighlightText"></div>
+      </div>
+      <div class="tooltip">
         <button id="toggleDrawButton" class="drawButton"></button>
-
+        <span class="tooltiptext" id="tooltipDrawText"></span>
       </div>
     </div>
     
@@ -160,7 +169,6 @@
       <script type="module" src="./components/MouseEvents/draw.js"></script>
       <script type="module" src="./components/style/navStyle.js"></script>
       <script type="module" src="./components/Timechanger/timeChanger.js"></script>
-      <script type="module" src="./components/Toolbar/tools.js"></script>
       
   </body>
 </html>
