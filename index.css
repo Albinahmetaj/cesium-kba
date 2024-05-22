@@ -32,6 +32,8 @@ body,
   display: none;
   touch-action: none;
   user-select: none;
+  min-width: 338.153px;
+  min-height: 234.048px;
 }
 
 h3 {
@@ -131,7 +133,7 @@ h3 {
   content: "✖";
 }
 .check:checked:before {
-  content: "✓";
+  content: "✔";
 }
 
 .check:hover {

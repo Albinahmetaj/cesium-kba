@@ -11,14 +11,6 @@ let distanceDisplay = document.getElementById("distanceDisplay");
 const activateDrawButton = document.getElementById("toggleDrawButton");
 const toolBar = document.getElementById("toolbar");
 
-// function isMobileOrTablet() {
-//   return (
-//     /Android|webOS|iPhone|iPad|iPod|iPad Air|BlackBerry|IEMobile|Opera Mini/i.test(
-//       navigator.userAgent
-//     ) || window.innerWidth < 1366
-//   );
-//     }
-
 // Function to check if the device is a mobile or tablet
 function isMobileOrTablet() {
   let check = false;
@@ -327,6 +319,9 @@ activateDrawButton.addEventListener("click", () => {
 
     isDrawingActive = true;
 
+    viewer.canvas.style.cursor =
+      "url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%222em%22 height=%222em%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22white%22 d=%22M12 18a6 6 0 1 1 0-12a6 6 0 0 1 0 12m0-1.5a4.5 4.5 0 1 0 0-9a4.5 4.5 0 0 0 0 9%22/%3E%3C/svg%3E') 12 12, auto";
+
     const lineButton = document.createElement("button");
     lineButton.onclick = (e) => {
       e.stopPropagation();
@@ -369,6 +364,7 @@ activateDrawButton.addEventListener("click", () => {
   } else {
     activateDrawButton.innerHTML = "";
     activateDrawButton.classList.remove("active");
+    viewer.canvas.style.cursor = "auto";
     handler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_CLICK);
     handler.removeInputAction(Cesium.ScreenSpaceEventType.MOUSE_MOVE);
     handler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK);
