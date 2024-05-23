@@ -274,23 +274,46 @@ const activateDraw = () => {
 
 // Function to terminate the shape drawing and display the area of the polygon as a label
 function terminateShape() {
-  // Display the area of the polygon as a label
-  if (drawType === "polygon") {
-    const center = Cesium.BoundingSphere.fromPoints(activeShapePoints).center;
-    const { area, unit } = calculateArea(activeShapePoints);
-    viewer.entities.add({
-      position: center,
-      label: {
-        text: `${area.toFixed(2)} ${unit}`,
-        font: "16px",
-        fillColor: Cesium.Color.AQUA,
-        outlineColor: Cesium.Color.BLACK,
-        style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-        outlineWidth: 2,
-        verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-        pixelOffset: new Cesium.Cartesian2(0, -9),
-      },
-    });
+  try {
+    if (
+      drawType === "polygon" &&
+      activeShapePoints &&
+      activeShapePoints.length > 0
+    ) {
+      const center = Cesium.BoundingSphere.fromPoints(activeShapePoints).center;
+
+      if (center) {
+        const cartographicCenter = Cesium.Cartographic.fromCartesian(center);
+
+        if (cartographicCenter) {
+          const height =
+            viewer?.scene?.globe?.getHeight(cartographicCenter) || 0; // default to 0 if undefined
+          const position = Cesium.Cartesian3.fromRadians(
+            cartographicCenter.longitude,
+            cartographicCenter.latitude,
+            height
+          );
+
+          // Display the area of the polygon as a label
+          const { area, unit } = calculateArea(activeShapePoints);
+          viewer.entities.add({
+            position: position,
+            label: {
+              text: `${area.toFixed(2)} ${unit}`,
+              font: "16px",
+              fillColor: Cesium.Color.AQUA,
+              outlineColor: Cesium.Color.BLACK,
+              style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+              outlineWidth: 2,
+              verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+              pixelOffset: new Cesium.Cartesian2(0, -9),
+            },
+          });
+        }
+      }
+    }
+  } catch (error) {
+    console.log("error in polygon viewer entity: ", error);
   }
   activeShapePoints.pop();
   drawShape(activeShapePoints);
