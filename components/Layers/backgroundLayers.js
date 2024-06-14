@@ -104,12 +104,12 @@ function fetchWMSLayers(url) {
         imageForEachLi.classList.add("blbItemImage");
         labelButton.classList.add("blbItemLabel");
         // Set image source
-        imageForEachLi.src = `${"../../assets/" + displayTitle}.png`;
+        imageForEachLi.src = `${"./assets/" + displayTitle}.png`;
 
         // Add an error handler to use the emptyImageError image if the specified image is not found
         imageForEachLi.onerror = (event) => {
           console.log(`Failed to load image: ${event.target.src}`);
-          imageForEachLi.src = "../../assets/emptyImageError.png";
+          imageForEachLi.src = "./assets/emptyImageError.png";
         };
         // Process layer names
         const trimLayerName = layerName.replace("ikba:", "");
@@ -181,11 +181,9 @@ function fetchWMSLayers(url) {
             );
             // Set the image source to the selected layer
             if (trimSelectedLayerName) {
-              imageElement.src = `${
-                "../../assets/" + trimSelectedLayerName
-              }.png`;
+              imageElement.src = `${"./assets/" + trimSelectedLayerName}.png`;
             } else {
-              imageElement.src = "../../assets/default.png";
+              imageElement.src = "./assets/default.png";
             }
           }
         }
@@ -214,9 +212,9 @@ function fetchWMSLayers(url) {
           "ikba:",
           ""
         );
-        imageElement.src = `${"../../assets/" + trimDefaultLayerName}.png`
-          ? `${"../../assets/" + trimDefaultLayerName}.png`
-          : "../../assets/default.png";
+        imageElement.src = `${"./assets/" + trimDefaultLayerName}.png`
+          ? `${"./assets/" + trimDefaultLayerName}.png`
+          : "./assets/default.png";
       } else {
         const url = "https://karta.kungsbacka.se/geoserver/wms?";
         const imageryProvider = new Cesium.WebMapServiceImageryProvider({
@@ -228,12 +226,12 @@ function fetchWMSLayers(url) {
           layers: "kba:flygfoto_kba_2023_8cm_geotiff",
         });
         viewer.imageryLayers.addImageryProvider(imageryProvider);
-        imageElement.src = "../../assets/flygfoto_kba_2023_8cm_geotiff.png";
+        imageElement.src = "./assets/flygfoto_kba_2023_8cm_geotiff.png";
       }
 
       imageElement.onerror = (event) => {
         console.log(`Failed to load image: ${event.target.src}`);
-        imageElement.src = "../../assets/emptyImageError.png";
+        imageElement.src = "./assets/emptyImageError.png";
       };
 
       if (url !== fallbackUrl) {
@@ -263,7 +261,7 @@ function fetchWMSLayers(url) {
         );
 
         viewer.imageryLayers.add(defaultImageryProvider);
-        imageElement.src = "../../assets/default.png";
+        imageElement.src = "./assets/default.png";
       }
     });
 }
