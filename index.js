@@ -2,7 +2,7 @@
 import { applyBasicStyle } from "./components/style/buildingStyle.js";
 
 // Description: This file contains the main logic for the Cesium application.
-// It initializes the Cesium viewer and adds the default and KBA tilesets to the scene.
+// It initializes the Cesium viewer and adds the default, KBA tilesets, Bolsheden, hospital and later Nidingen tilesets to the viewer's scene
 // It also adds event listeners to the checkboxes to toggle the visibility of the tilesets.
 
 // Access token for Cesium Ion
@@ -10,48 +10,32 @@ Cesium.Ion.defaultAccessToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJkNDQ3MDgxZC02OWU2LTRiNTMtYjUyNS1hYmRiMGRjMGE2N2EiLCJpZCI6MTkxOTM0LCJpYXQiOjE3MDc5MTU1NzF9.wwiBhBlO6d9r53a5uOWZkATR5tZGFzUpbt-I1ewTP1w";
 
 export const viewer = new Cesium.Viewer("cesiumContainer", {
-  infoBox: true,
+  infoBox: false,
   selectionIndicator: false,
   shadows: true,
   terrainShadows: Cesium.ShadowMode.ENABLED,
   timeline: false,
   animation: false,
-  navigationHelpButton: false,
+  sceneModePicker: true,
   baseLayerPicker: false,
-  // imageryProvider: false,
+  imageryProvider: false,
 });
-// const url = "https://ows.terrestris.de/osm/service?";
-// const imageryProvider = new Cesium.WebMapServiceImageryProvider({
-//   url: url,
-//   parameters: {
-//     format: "image/png",
-//     transparent: "true",
-//   },
-//   layers: "OSM-WMS",
-// });
 
-//Define your own imagery provider
-// const url = "https://karta.kungsbacka.se/geoserver/wms";
-// const imageryProvider = new Cesium.WebMapServiceImageryProvider({
-//   url: url,
-//   parameters: {
-//     format: "image/png",
-//     transparent: "true",
-//   },
-//   layers: "kba:topowebbkartan_nedtonad",
-// });
+let spinner = document.getElementById("spinnerContainer");
+// an event listener to toggle between on and off for the visibility of the layer switcher card.
+const toolbar = document.querySelector("div.cesium-viewer-toolbar");
+const modeButton = document.querySelector(
+  "span.cesium-sceneModePicker-wrapper"
+);
 
-// const url = "https://karta.kungsbacka.se/geoserver/wms";
-// const imageryProvider = new Cesium.WebMapServiceImageryProvider({
-//   url: url,
-//   parameters: {
-//     format: "image/png",
-//     transparent: "true",
-//   },
-//   layers: "kba:flygfoto_kba_2023_8cm_geotiff",
-// });
+const layerSwitcherButton = document.createElement("button");
+layerSwitcherButton.classList.add("cesium-button", "cesium-toolbar-button");
+layerSwitcherButton.setAttribute("title", "Lagerhanteraren");
 
-// viewer.imageryLayers.addImageryProvider(imageryProvider);
+const helpInstructionButton = document.querySelector(
+  ".cesium-navigation-help-button"
+);
+helpInstructionButton.setAttribute("title", "Hjälp och instruktioner");
 
 // The different tiles that can be shown
 let defaultTileset,
@@ -147,6 +131,7 @@ async function applyViewer() {
     if (defaultTileset) {
       defaultTileset.show = state.defaultTileset;
     }
+
     // Initially show the KBA tileset (assuming it's visible by default)
     if (kbaTileset) {
       kbaTileset.show = state.kbaTileset;
@@ -166,13 +151,25 @@ async function applyViewer() {
   }
 }
 
+// Add the tileLoadProgressEvent listener
+viewer.scene.globe.tileLoadProgressEvent.addEventListener(function (
+  remainingTiles
+) {
+  // Show the spinner while the tiles are loading
+  if (remainingTiles === 0) {
+    // Hide the spinner when all tiles are loaded
+    spinner.style.display = "none";
+  } else {
+    spinner.style.display = "block";
+  }
+});
+
 // Function to update tileset visibility based on state
 async function updateTilesetVisibility() {
   try {
     // Update default tileset visibility
     if (defaultTileset) {
       defaultTileset.show = state.defaultTileset;
-
       // close the infobox when the tileset is hidden
       if (!state.defaultTileset) {
         viewer.selectedEntity = undefined;
@@ -188,20 +185,10 @@ async function updateTilesetVisibility() {
       }
     }
 
-    // Update Nidingen tileset visibility
-    // if (nidingenTileset) {
-    //   nidingenTileset.show = state.nidingenTileset;
-
-    //   // close the infobox when the tileset is hidden
-    //   if (!state.nidingenTileset) {
-    // close the infobox when the tileset is hidden
-    //     viewer.selectedEntity = undefined;
-    //   }
-    // }
-
     // Update KBA tileset visibility
     if (bolshedenTileSet) {
       bolshedenTileSet.show = state.bolshedenTileSet;
+
       // close the infobox when the tileset is hidden
       if (!state.bolshedenTileSet) {
         viewer.selectedEntity = undefined;
@@ -220,14 +207,20 @@ async function updateTilesetVisibility() {
     if (state.defaultTileset) {
       // Set terrainProvider for default tileset if not already set
       if (!defaultTerrainProvider) {
+        spinner.style.display = "block";
+
+        // show a loading spinner while the terrain is loading
         defaultTerrainProvider =
           await Cesium.CesiumTerrainProvider.fromIonAssetId(1);
       }
       viewer.terrainProvider = defaultTerrainProvider;
     }
+
     if (state.kbaTileset) {
       // Set terrainProvider for KBA tileset if not already set
       if (!kbaTerrainProvider) {
+        spinner.style.display = "block";
+
         kbaTerrainProvider = await Cesium.CesiumTerrainProvider.fromIonAssetId(
           2564535
         );
@@ -237,6 +230,8 @@ async function updateTilesetVisibility() {
     if (state.bolshedenTileSet) {
       // Set terrainProvider for Bolsheden tileset if not already set
       if (!bolshedenTerrainProvider) {
+        spinner.style.display = "block";
+
         bolshedenTerrainProvider =
           await Cesium.CesiumTerrainProvider.fromIonAssetId(2563037);
       }
@@ -245,6 +240,8 @@ async function updateTilesetVisibility() {
     if (state.hospitalTileSet) {
       // Set terrainProvider for Hospital tileset if not already set
       if (!hospitalTerrainProvider) {
+        spinner.style.display = "block";
+
         hospitalTerrainProvider =
           await Cesium.CesiumTerrainProvider.fromIonAssetId(2563139);
       }
@@ -257,42 +254,67 @@ async function updateTilesetVisibility() {
   }
 }
 
-updateTilesetVisibility().then(() => {
-  // Attach event listeners after initial terrain setup
-  defaultCheckbox.addEventListener("change", function () {
-    state.defaultTileset = defaultCheckbox.checked;
-    updateTilesetVisibility();
-  });
+function saveCheckboxState() {
+  // Save the state of the checkboxes to local storage
+  localStorage.setItem("defaultTileset", state.defaultTileset);
+  localStorage.setItem("kbaTileset", state.kbaTileset);
+  localStorage.setItem("bolshedenTileSet", state.bolshedenTileSet);
+  localStorage.setItem("hospitalTileSet", state.hospitalTileSet);
+}
 
-  kbaCheckbox.addEventListener("change", function () {
-    state.kbaTileset = kbaCheckbox.checked;
-    updateTilesetVisibility();
-  });
+// Load the state of the checkboxes from local storage
+function loadCheckboxState() {
+  state.defaultTileset = localStorage.getItem("defaultTileset") === "true";
+  state.kbaTileset =
+    localStorage.getItem("kbaTileset") !== null
+      ? localStorage.getItem("kbaTileset") === "true"
+      : true;
+  state.bolshedenTileSet = localStorage.getItem("bolshedenTileSet") === "true";
+  state.hospitalTileSet = localStorage.getItem("hospitalTileSet") === "true";
 
-  bolshedenCheckbox.addEventListener("change", function () {
-    state.bolshedenTileSet = bolshedenCheckbox.checked;
-    updateTilesetVisibility();
-  });
+  defaultCheckbox.checked = state.defaultTileset;
+  kbaCheckbox.checked = state.kbaTileset;
+  bolshedenCheckbox.checked = state.bolshedenTileSet;
+  hospitalCheckbox.checked = state.hospitalTileSet;
+}
 
-  hospitalCheckbox.addEventListener("change", function () {
-    state.hospitalTileSet = hospitalCheckbox.checked;
-    updateTilesetVisibility();
+window.addEventListener("load", () => {
+  loadCheckboxState();
+  updateTilesetVisibility().then(() => {
+    // Attach event listeners after initial terrain setup
+    defaultCheckbox.addEventListener("change", function () {
+      state.defaultTileset = defaultCheckbox.checked;
+      updateTilesetVisibility();
+      saveCheckboxState();
+    });
+
+    kbaCheckbox.addEventListener("change", function () {
+      state.kbaTileset = kbaCheckbox.checked;
+      updateTilesetVisibility();
+      saveCheckboxState();
+    });
+
+    bolshedenCheckbox.addEventListener("change", function () {
+      state.bolshedenTileSet = bolshedenCheckbox.checked;
+      updateTilesetVisibility();
+      saveCheckboxState();
+    });
+
+    hospitalCheckbox.addEventListener("change", function () {
+      state.hospitalTileSet = hospitalCheckbox.checked;
+      updateTilesetVisibility();
+      saveCheckboxState();
+    });
   });
 });
-
-// an event listener to toggle between on and off for the visibility of the layer switcher card.
-const toolbar = document.querySelector("div.cesium-viewer-toolbar");
-const modeButton = document.querySelector(
-  "span.cesium-sceneModePicker-wrapper"
-);
-const layerSwitcherButton = document.createElement("button");
-layerSwitcherButton.classList.add("cesium-button", "cesium-toolbar-button");
-layerSwitcherButton.setAttribute("title", "Lagerhanteraren");
 
 // Function to update the tooltip title of the time changer button based on the current language
 export function updateLayerSwitcherToolTipTitle() {
   if (layerSwitcherButton) {
     layerSwitcherButton.setAttribute("title", i18next.t("lsTooltipTitle"));
+  }
+  if (helpInstructionButton) {
+    helpInstructionButton.setAttribute("title", i18next.t("helpTooltipTitle"));
   }
 }
 
@@ -375,4 +397,5 @@ document
   .getElementById("zoom-out-button")
   .addEventListener("click", zoomOut, false);
 
+// Load the state of the checkboxes from local storage
 applyViewer();

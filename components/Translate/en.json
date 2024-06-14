@@ -1,10 +1,10 @@
 {
   "lsTitle": "Layerswitcher",
   "lsDefaultContent": "OpenStreetMap 3D buildings & terrain",
-  "lsKbaContent": "Kungsbacka 3D buildings & terrain",
+  "lsKbaContent": "3D buildings & terrain in Kungsbacka's central town",
   "lsNidingenContent": "Nidingen 3D-buildings & terrain",
   "lsBolShedenContent": "Bolsheden 3D-buildings & terrain",
-  "lsHospitalContent": "Hospital 3D-buildings & terrain",
+  "lsHospitalContent": "Kungsbacka hospital 3D-buildings & terrain",
   "timeChangerTitle": "Toggle solstice winter- or summer time",
   "timeChangerMonth": "Month",
   "propertyName.name": "Name",
@@ -38,7 +38,8 @@
     "Hus": "Houses",
     "Lägenheter": "Apartments",
     "Skola": "Schools",
-    "Affärer": "Shops"
+    "Affärer": "Shops",
+    "Industrier": "Industries"
   },
   "tableTitleKey": "Buildingtypes",
   "homeButtonToolTipTitle": "Reset view to start position",
@@ -49,5 +50,8 @@
   "lsToolTipZoomInText": "Zoom in",
   "lsToolTipZoomOutText": "Zoom  out",
   "lsToolTipInfoClickHighlightText": "Click to highlight building (disabled)",
-  "lsToolTipDrawText": "Draw"
+  "lsToolTipDrawText": "Draw",
+  "blLabel": "Background",
+  "spinnerLabel": "Loading terrain...",
+  "helpTooltipTitle": "Help and instructions"
 }

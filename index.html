@@ -20,8 +20,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link href="https://cesium.com/downloads/cesiumjs/releases/1.117/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+    <link href="/spinner.css" rel="stylesheet">
     <link href="./index.css" rel="stylesheet" />
-    <script src="https://cesium.com/downloads/cesiumjs/releases/1.117/Build/Cesium/Cesium.js"></script>
+ <script src="https://cesium.com/downloads/cesiumjs/releases/1.117/Build/Cesium/Cesium.js"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/i18next/23.9.0/i18next.min.js"
       integrity="sha512-2KRrfza4PJZX3WAcWBaOo6S3u7uOrnESelNwYwkYUgeLskpL1EYZvpo9uTfLphaUScNXrWasCK0J8gcYrVwGXA=="
@@ -30,7 +31,6 @@
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-xhr-backend/3.2.2/i18nextXHRBackend.min.js" integrity="sha512-MUYO1+VEcFMYb/UEtAGdOArYvDh/yth3ZQwfmdttD9CURHAMzkfCZPRYIbXNCbOQWSjOXjjj5xwjEk/gEMXCdg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
   </head>
   <body>
 
@@ -49,19 +49,19 @@
       <div class="zoom-panel">
         <div class="tooltip">
         <button id="zoom-in-button">
-          <span id="zoom-in-plus">+</span>
+          <div id="zoom-in-plus">+</div>
         </button>
         <div class="tooltiptext" id="tooltipZoomInText"></div>
       </div>
       <div class="tooltip">
         <button id="zoom-out-button">
-          <span id="zoom-out-minus">-</span>
+          <div id="zoom-out-minus">-</div>
         </button>
         <div class="tooltiptext" id="tooltipZoomOutText"></div>
       </div>  
       </div>
     </div>
-    
+
     <div class="toolbar" id="toolbar">
       <div class="tooltip">
         <button disabled id="toggleInfoBoxButton" class="infoClickButton"></button>
@@ -73,29 +73,28 @@
       </div>
     </div>
     
-
     <div id="cesiumContainer">
       <img src="./assets/Logo.png" class="kbaLogo" />
     </div>
 
     <div id="draggableLayerSwitcherCard" class="draggable-element">
       <div class="layer-switcher-header">
-        <h3 id="layer-switcher-title"></h3>
+        <h3 style="margin:0;" id="layer-switcher-title"></h3>
         <hr />
       </div>
       <div class="layer-switcher">
-          <label style="width: fit-content;">
+          <label class="lsLabel">
             <input type="checkbox" id="toggleDefaultTileset" class="check">
             <span class="ls-content-titles" id="default-content"></span>
           </input>
           </label>
-         <label style="width: fit-content;">
+         <label class="lsLabel">
             <input type="checkbox" id="toggleKBATileset" class="check" checked>
             <span class="ls-content-titles" id="kba-content"></span>
           </input>
           </label>
           <div class="toggle-nidingen-row">
-            <label style="width: fit-content;">
+            <label class="lsLabel">
               <input type="checkbox" id="toggleNidingenTileset" class="check">
               <span class="ls-content-titles" id="nidingen-content"></span>
             </input>
@@ -109,7 +108,7 @@
         </div>
       </div>
       <div class="toggle-nidingen-row">
-      <label style="width: fit-content;">
+      <label class="lsLabel">
         <input type="checkbox" id="toggleBolshedenTileset" class="check">
         <span class="ls-content-titles" id="bolsheden-content"></span>
       </input>
@@ -123,7 +122,7 @@
         </div>
         </div>
         <div class="toggle-nidingen-row">
-          <label style="width: fit-content;">
+          <label class="lsLabel">
             <input type="checkbox" id="toggleHospitalTileset" class="check">
             <span class="ls-content-titles" id="hospital-content"></span>
           </input>
@@ -138,7 +137,37 @@
             </div>
         </div>
       </div>
-      
+
+      <div id="layerSelection">
+        <select id="layers" class="hidden"></select>
+      </div>
+      <div class="container">
+        <div id="imgContainer" class="hidden">
+          <img id="layerImage" src="" alt="Layer Image" />
+          <div class="imageLabel">
+            <div class="backgroundLayerIcon"></div>
+            <label id="backgroundLayerLabel"></label>
+          </div>
+        </div>
+        <div id="backGroundLayerContainer" class="hidden">
+          <div class="backgroundLayerBar" id="blBar" >
+            <div style="display: block; unicode-bidi: isolate;">
+              <ul id="blbItemsUl">
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <span id="loader" class="loader"></span>
+        <div id="spinnerContainer">
+          <span id="spinnerLabel"></span>
+          <div id="spinner"></div>
+        </div>
+      </div>
+
     <div id="timeChangerCard" class="draggable-element">
         <div id="timeDateTogglev"></div>
         <button id="summerButton"></button>
@@ -160,7 +189,7 @@
           <span id="hourOutput"></span>
       </div>
     </div>
-    
+    <script type="module" src="./components/Layers/backgroundLayers.js"></script>
       <script type="module" src="index.js"></script>
       <script type="module" src="./components/Translate/translate.js"></script>
       <script type="module" src="./components/CardInteraction/Resizeable.js"></script>
@@ -169,6 +198,5 @@
       <script type="module" src="./components/MouseEvents/draw.js"></script>
       <script type="module" src="./components/style/navStyle.js"></script>
       <script type="module" src="./components/Timechanger/timeChanger.js"></script>
-      
   </body>
 </html>

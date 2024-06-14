@@ -1,10 +1,10 @@
 {
   "lsTitle": "Lagerhanteraren",
   "lsDefaultContent": "OpenStreetMaps 3D-byggnader & terräng",
-  "lsKbaContent": "Kungsbackas 3D-byggnader & terräng",
+  "lsKbaContent": "3D-byggnader & terräng i Kungsbackas centralort",
   "lsNidingenContent": "Nidingens 3D-byggnader & terräng",
   "lsBolShedenContent": "Bolshedens 3D-byggnader & terräng",
-  "lsHospitalContent": "Sjukhusets 3D-byggnader & terräng",
+  "lsHospitalContent": "Kungsbacka sjukhus 3D-byggnader & terräng",
   "timeChangerTitle": "Välj solstudie vinter- eller sommartid",
   "timeChangerMonth": "Månad",
   "timeChangerDay": "Dag",
@@ -38,7 +38,8 @@
     "Hus": "Hus",
     "Lägenheter": "Lägenheter",
     "Skola": "Skolor",
-    "Affärer": "Affärer"
+    "Affärer": "Affärer",
+    "Industrier": "Industrier"
   },
   "tableTitleKey": "Byggnadstyper",
   "homeButtonToolTipTitle": "Återställ vy till startposition",
@@ -49,5 +50,8 @@
   "lsToolTipZoomInText": "Zooma in",
   "lsToolTipZoomOutText": "Zooma ut",
   "lsToolTipInfoClickHighlightText": "Klicka för att markera byggnad (Inaktiverad)",
-  "lsToolTipDrawText": "Rita"
+  "lsToolTipDrawText": "Rita",
+  "blLabel": "Bakgrund",
+  "spinnerLabel": "Laddar terräng...",
+  "helpTooltipTitle": "Hjälp och instruktioner"
 }

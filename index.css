@@ -14,14 +14,14 @@ body,
 
 .kbaLogo {
   position: absolute;
-  top: 10px;
+  top: 0px;
   z-index: 1000;
-  width: 200px;
+  width: 150px;
 }
 
 #draggableLayerSwitcherCard {
   position: absolute;
-  top: 35%;
+  top: 25%;
   left: 20px;
   z-index: 1000;
   background-color: rgba(0, 99, 175, 0.6);
@@ -32,8 +32,9 @@ body,
   display: none;
   touch-action: none;
   user-select: none;
-  min-width: 338.153px;
-  min-height: 234.048px;
+  min-width: 392px;
+  min-height: 200px;
+  height: 205px;
 }
 
 h3 {
@@ -70,7 +71,7 @@ h3 {
 
 .emojione--flag-for-sweden {
   display: inline-block;
-  margin-right: 5px;
+  margin: 0 7px 0 10px;
   width: 1.5em;
   height: 1.5em;
   cursor: pointer;
@@ -101,14 +102,19 @@ h3 {
 
 .country-flags {
   position: absolute;
-  right: 7px;
+  right: 0.5%;
   z-index: 1000;
-  margin-top: 0.47rem;
+  margin-top: 7.5px;
 }
 
 .cesium-infoBox {
   top: 20%;
-  right: 0.5rem;
+  right: 0.5%;
+}
+
+.lsLabel {
+  width: fit-content;
+  margin: 5px 0 0 0;
 }
 
 .check {
@@ -116,7 +122,7 @@ h3 {
   -webkit-appearance: none;
   height: 20px;
   width: 20px;
-  position: relative;
+  position: absolute;
   transition: 0.1s;
   background-color: #ffffff;
   text-align: center;
@@ -129,11 +135,9 @@ h3 {
 .check:checked {
   background-color: #0e9700;
 }
-.check:before {
-  content: "✖";
-}
+
 .check:checked:before {
-  content: "✔";
+  content: "\2713";
 }
 
 .check:hover {
@@ -150,7 +154,7 @@ h3 {
 }
 
 .cesium-viewer-toolbar {
-  right: 7rem;
+  right: 7%;
 }
 
 .infoNavBtn {
@@ -171,7 +175,7 @@ h3 {
 #infoTable {
   position: absolute;
   top: 10%;
-  right: 10rem;
+  right: 10%;
   z-index: 1000;
   background-color: rgba(0, 99, 175, 0.6);
   border: 3px solid #cbd4dc;
@@ -194,8 +198,8 @@ h3 {
 
 #timeChangerCard {
   position: absolute;
-  bottom: 3em;
-  right: 1em;
+  bottom: 30px;
+  right: 50px;
   z-index: 1000;
   background-color: rgba(0, 99, 175, 0.6);
   padding: 10px;
@@ -266,8 +270,7 @@ h3 {
   background-color: #46e1ec;
 }
 #monthContainer {
-  margin-bottom: 15px;
-  margin-top: 10px;
+  margin: 10px 0 15px 0;
 }
 #monthSlider {
   width: 100%;
@@ -280,8 +283,7 @@ h3 {
 
 #hourContainer {
   width: 100%;
-  margin-top: 10px;
-  margin-left: 10px;
+  margin: 10px 0 0 10px;
 }
 
 #timeDateTogglev {
@@ -290,8 +292,8 @@ h3 {
 
 #nidingenCameraButton {
   display: inline-block;
-  width: 1.9em;
-  height: 1.9em;
+  width: 1.5em;
+  height: 1.5em;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath fill='white' d='M228 175a8 8 0 0 1-10.92-3l-19-33.2A123.23 123.23 0 0 1 162 155.46l5.87 35.22a8 8 0 0 1-6.58 9.21a8.4 8.4 0 0 1-1.29.11a8 8 0 0 1-7.88-6.69l-5.77-34.58a133.06 133.06 0 0 1-36.68 0l-5.77 34.58A8 8 0 0 1 96 200a8.4 8.4 0 0 1-1.32-.11a8 8 0 0 1-6.58-9.21l5.9-35.22a123.23 123.23 0 0 1-36.06-16.69L39 172a8 8 0 1 1-13.94-8l20-35a153.47 153.47 0 0 1-19.3-20a8 8 0 1 1 12.46-10c16.6 20.54 45.64 45 89.78 45s73.18-24.49 89.78-45a8 8 0 1 1 12.44 10a153.47 153.47 0 0 1-19.3 20l20 35a8 8 0 0 1-2.92 11'/%3E%3C/svg%3E");
@@ -308,15 +310,15 @@ h3 {
 }
 
 .zoom-panel {
-  margin-top: 12px;
+  margin-top: 20px;
   display: flex;
   justify-content: center;
   gap: 12px;
 }
 #zoom-in-button {
-  display: inline-block;
-  width: 2.3em;
-  height: 2.3em;
+  display: block;
+  width: 2.5em;
+  height: 2.5em;
   background-size: 100% 100%;
   background-color: #ffffff;
   border: 1.5px solid #000000;
@@ -325,9 +327,9 @@ h3 {
 }
 
 #zoom-out-button {
-  display: inline-block;
-  width: 2.3em;
-  height: 2.3em;
+  display: block;
+  width: 2.5em;
+  height: 2.5em;
   background-size: 100% 100%;
   background-color: #ffffff;
   border: 1.5px solid #000000;
@@ -335,11 +337,11 @@ h3 {
   cursor: pointer;
 }
 #zoom-in-plus {
-  font-size: 1.5em;
+  font-size: 20px;
   color: black;
 }
 #zoom-out-minus {
-  font-size: 1.5em;
+  font-size: 20px;
   color: black;
 }
 
@@ -359,6 +361,7 @@ h3 {
 
 .ls-content-titles {
   font-size: smaller;
+  margin: 0 0 0 30px;
 }
 
 .toolbar {
@@ -367,8 +370,8 @@ h3 {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  bottom: 40%;
-  right: 5px;
+  bottom: 25%;
+  right: 0.3%;
 }
 
 .drawButton {
@@ -476,13 +479,200 @@ h3 {
   text-align: center;
   border-radius: 6px;
   padding: 5px 0;
-
-  /* Position the tooltip */
   position: absolute;
-
   z-index: 1;
 }
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
+}
+
+#layerSelection {
+  position: absolute;
+  display: block;
+  bottom: 15%;
+  left: 20px;
+  z-index: 1000;
+}
+
+.container {
+  position: relative;
+  display: block;
+  caret-color: transparent;
+}
+
+#layerImage {
+  width: 100%;
+  height: 100%;
+  margin-right: 5px;
+  position: absolute;
+  border-radius: 6px;
+}
+
+#imgContainer {
+  background: #fff;
+  border: 0;
+  box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3),
+    0 1px 3px 1px rgba(60, 64, 67, 0.15);
+  background-color: #f1f3f4;
+  bottom: 0;
+  border-radius: 8px;
+  border: 2px solid #fff;
+  box-sizing: border-box;
+  height: 80px;
+  left: 20px;
+  opacity: 1;
+  overflow: hidden;
+  margin-bottom: 10px;
+  position: absolute;
+  transform: translateZ(0);
+  transition: width 0.4s, height 0.4s, opacity 0.6s ease-in, margin-bottom 0.4s;
+  width: 85px;
+  z-index: 7;
+}
+
+#imgContainer:hover {
+  border: 2px solid #0063af;
+  box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3),
+    0 1px 3px 1px rgba(60, 64, 67, 0.15);
+}
+
+.backgroundLayerBar {
+  display: none;
+  position: absolute;
+  margin-bottom: 8px;
+  bottom: 0;
+  left: 7%;
+  border-radius: 8px;
+  color: #202124;
+  padding: 10px 18px 6px;
+  background-color: #fff;
+  border: 0;
+  box-shadow: 0 1px 3px rgba(60, 64, 67, 0.3),
+    0 4px 8px 3px rgba(60, 64, 67, 0.15);
+  transition: opacity 0.5s ease;
+}
+
+@media screen and (max-width: 1600px) {
+  .backgroundLayerBar {
+    left: 8%;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .backgroundLayerBar {
+    left: 9%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .backgroundLayerBar {
+    left: 10%;
+  }
+}
+
+.container:hover .backgroundLayerBar {
+  display: block;
+}
+
+.imageLabel {
+  border-radius: 6px;
+  color: #fff;
+  font-size: 10px;
+  position: absolute;
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  line-height: normal;
+  padding: 5px 0 2px 0px;
+  bottom: 0;
+  left: 0;
+  width: calc(100% - 0px);
+  background-image: linear-gradient(
+    transparent,
+    transparent 20%,
+    rgba(0, 0, 0, 0.2) 20%,
+    rgba(0, 0, 0, 0.4) 60%,
+    rgba(0, 0, 0, 0.6) 80%,
+    rgba(0, 0, 0, 0.6)
+  );
+}
+
+.backgroundLayerIcon {
+  display: inline-block;
+  width: 1.4em;
+  height: 1.4em;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m21 14l-9 6l-9-6m18-4l-9 6l-9-6l9-6z'/%3E%3C/svg%3E");
+}
+
+#blbItemsUl {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  width: 100%;
+}
+
+.blbItemLi {
+  display: list-item;
+  text-align: -webkit-match-parent;
+  unicode-bidi: isolate;
+  list-style-type: none;
+}
+.blbItemImage {
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  object-fit: cover; /* Ensures the image covers the button without distortion */
+}
+
+.blbItemButton {
+  color: black;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 0;
+  position: relative;
+  text-align: center;
+  width: 75px;
+  height: 70px;
+  padding: 0;
+  border-radius: 6px;
+}
+
+.blbItemButton:hover {
+  border: 2px solid #0063af;
+  box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3),
+    0 1px 3px 1px rgba(60, 64, 67, 0.15);
+}
+
+.blbItemLabel {
+  border-radius: 6px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 10px;
+  position: absolute;
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  line-height: normal;
+  padding: 5px 0 2px 0px;
+  bottom: 0;
+  left: 0;
+  width: calc(100% - 0px);
+  background-image: linear-gradient(
+    transparent,
+    transparent 20%,
+    rgba(0, 0, 0, 0.2) 20%,
+    rgba(0, 0, 0, 0.4) 60%,
+    rgba(0, 0, 0, 0.6) 80%,
+    rgba(0, 0, 0, 0.6)
+  );
+}
+.blbItemButton.selected {
+  border: 3px solid #0063af;
 }

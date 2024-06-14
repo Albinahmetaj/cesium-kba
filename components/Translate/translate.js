@@ -55,6 +55,10 @@ function updateContent() {
       i18next.t("lsToolTipInfoClickHighlightText");
     document.getElementById("tooltipDrawText").innerText =
       i18next.t("lsToolTipDrawText");
+    document.getElementById("backgroundLayerLabel").innerText =
+      i18next.t("blLabel");
+    document.getElementById("spinnerLabel").innerText =
+      i18next.t("spinnerLabel");
   } catch (error) {
     console.log(error);
   }

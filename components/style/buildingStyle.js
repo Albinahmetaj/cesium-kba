@@ -1,21 +1,23 @@
 // Define a global object to store building color names
 const buildingColorNames = {
-  "Kungsbacka Kommun": "Kungsbacka Kommun",
+  Kungsbacka: "Kungsbacka Kommun",
   Parkering: "Parkering",
   Hus: "Hus",
   Lägenheter: "Lägenheter",
   Skola: "Skola",
   Affärer: "Affärer",
+  Industrier: "Industrier",
 };
 
 // Define a global object to store building color values
 const buildingColors = {
-  "Kungsbacka Kommun": "purple",
+  Kungsbacka: "purple",
   Parkering: "blue",
   Hus: "pink",
   Lägenheter: "yellow",
   Skola: "brown",
   Affärer: "red",
+  Industrier: "green",
 };
 
 // Function to apply basic color style to the default tileset 3d tiles
@@ -25,8 +27,8 @@ export function applyBasicStyle(defaultTileSetStyle) {
       color: {
         conditions: [
           [
-            "${operator} === 'Kungsbacka Kommun'",
-            `color('${buildingColors["Kungsbacka Kommun"]}')`,
+            "${operator} === 'Kungsbacka kommun'",
+            `color('${buildingColors["Kungsbacka"]}')`,
           ],
           [
             "${building} === 'parking'",
@@ -39,6 +41,10 @@ export function applyBasicStyle(defaultTileSetStyle) {
           ],
           ["${building} === 'school'", `color('${buildingColors["Skola"]}')`],
           ["${shop}", `color('${buildingColors["Affärer"]}')`],
+          [
+            "${building} === 'industrial'",
+            `color('${buildingColors["Industrier"]}')`,
+          ],
           ["true", "color('white')"],
         ],
       },
