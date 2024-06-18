@@ -85,14 +85,14 @@ function fetchWMSLayers(url) {
           const layerAbstract = abstractElement.textContent.trim();
           // Include layers where the title contains 'cesium_'
           if (layerTitle.startsWith("cesium_")) {
-            const displayTitle = layerTitle.replace("cesium_", ""); // Remove 'cesium_' prefix
+            const displayTitle = layerTitle.replace("cesium_", "");
             layerArray.push({ displayTitle, layerName, layerAbstract });
           }
         }
       }
 
       // Loop through the layerArray and create the list items in background layers for each item
-      layerArray.forEach(({ displayTitle, layerName, layerAbstract }) => {
+      layerArray.forEach(({ layerName, layerAbstract }) => {
         const li = document.createElement("li");
         const buttonForEachLi = document.createElement("button");
         const imageForEachLi = document.createElement("img");
@@ -104,7 +104,8 @@ function fetchWMSLayers(url) {
         imageForEachLi.classList.add("blbItemImage");
         labelButton.classList.add("blbItemLabel");
         // Set image source
-        imageForEachLi.src = `${"./assets/" + displayTitle}.png`;
+        const trimLayerName = layerName.replace("ikba:", "");
+        imageForEachLi.src = `${"./assets/" + trimLayerName}.png`;
 
         // Add an error handler to use the emptyImageError image if the specified image is not found
         imageForEachLi.onerror = (event) => {
@@ -112,7 +113,6 @@ function fetchWMSLayers(url) {
           imageForEachLi.src = "./assets/emptyImageError.png";
         };
         // Process layer names
-        const trimLayerName = layerName.replace("ikba:", "");
         const replaceLayerAbstract = layerAbstract.replace("cesium_", "");
         const layerNameCut = trimLayerName.slice(0, 11) + "...";
         // Set labelButton innerHTML
